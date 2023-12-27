@@ -1,0 +1,10 @@
+.draggable {
+  display: inline-block;
+  flex: 0;
+  cursor: grab;
+}
+
+.dragging {
+  background-color: #f3fafd;
+  cursor: grabbing;
+}

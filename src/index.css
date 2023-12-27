@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header-input::placeholder {
+  color: rgb(112, 110, 110); /* Replace 'gray' with the color of your choice */
+}
+select {
+  -webkit-appearance: none;  /* Remove default arrow for Webkit browsers */
+  -moz-appearance: none;     /* Remove default arrow for Mozilla browsers */
+  appearance: none;         /* Remove default arrow for all browsers */
+  background-image: url('./Assets/Images/chevron2.svg'); /* Path to your custom icon */
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* Adjust the position as needed */
+background-color: transparent;
+outline: none;
+  padding-right: 30px; /* Adjust padding to prevent text overlap with the icon */
+  /* Add other styling as needed */
+}
