@@ -9,6 +9,7 @@ import { Alert, Snackbar } from "@mui/material";
 import WaveAnimation from "Components/Loading"; // Adjust the path based on your file structure
 import * as action from "Services/redux/reducer";
 import { useNavigate } from "react-router-dom";
+import { BrandId } from "funtions/BrandId";
 
 function CreateBrand() {
   const dispatch = useDispatch();
@@ -30,8 +31,11 @@ function CreateBrand() {
   const [brandName, setBrandName] = useState("");
 
   useEffect(() => {
+    if (BrandId()) {
+      navigate("/branding/logo");
+    }
     getAllBrands();
-  }, []);
+  }, [BrandId()]);
   function handleSubmit(e) {
     e.preventDefault();
     dispatch({
@@ -51,7 +55,6 @@ function CreateBrand() {
       type: "GET_SINGLE_BRAND",
       payload: v,
     });
-    navigate("/dashboard/userlist");
   }
   // useEffect(() => {
   //   if (getBrand) {

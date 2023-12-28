@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Sidebar() {
+export default function Sidebar({ setName, name }) {
   const [searchTerm, setSearchTerm] = useState("");
   const onDragStart = (event, nodeType) => {
     event.dataTransfer.setData("application/reactflow", nodeType);
@@ -8,26 +8,12 @@ export default function Sidebar() {
   };
 
   const nodes = [
-    { type: "Sidebar", label: "Sidebar" },
-    { type: "Small Sidebar", label: "Small Sidebar" },
-    { type: "Menu", label: "Menu" },
-    { type: "Home", label: "Home" },
-    { type: "Api", label: "Api" },
-    { type: "Menu 2", label: "Menu 2" },
-    { type: "About", label: "About" },
-    { type: "About 2", label: "About 2" },
-    { type: "Link", label: "Link" },
-    { type: "Borrow", label: "Borrow" },
-    { type: "Emails", label: "Emails" },
-    { type: "Tasks", label: "Tasks" },
-    { type: "Reporting", label: "Reporting" },
-    { type: "Home 2", label: "Home 2" },
-    { type: "Tasks 3", label: "Tasks 3" },
-    { type: "Private", label: "Private" },
-    { type: "Routes", label: "Routes" },
-    { type: "Services", label: "Services" },
-    { type: "App", label: "App" },
-    { type: "Move", label: "Move" },
+    { type: "/decisions", label: "/decisions" },
+    { type: "/login", label: "/login" },
+    { type: "/Signup", label: "/Signup" },
+    { type: "/Decision2", label: "/Decision2" },
+    { type: "/Decision3", label: "/Decision3" },
+    { type: "/Names", label: "/Names" },
   ];
 
   const filteredNodes = nodes.filter((node) =>
@@ -37,7 +23,14 @@ export default function Sidebar() {
   return (
     <aside>
       <input
-        className="search-input w-full h-9 px-2 border-gray-300 border-2 rounded-sm outline-none"
+        className="search-input w-full h-9 px-2 border-blue-500 border-2 rounded-sm outline-none"
+        type="text"
+        placeholder="Name of Set"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        className="search-input w-full h-9 px-2 border-gray-300 border-2 rounded-sm outline-none mt-4"
         type="text"
         placeholder="Search nodes..."
         value={searchTerm}

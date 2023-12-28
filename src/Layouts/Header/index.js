@@ -126,6 +126,11 @@ const Dropdown = () => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+  const SwicthBrand = () => {
+    console.log("switch ");
+    localStorage.removeItem("brand");
+    navigate("/brands");
+  };
 
   // Event listener to handle clicks outside the dropdown
   const handleClickOutside = (event) => {
@@ -168,6 +173,14 @@ const Dropdown = () => {
               role="menuitem"
               tabIndex="-1">
               My Account
+            </a>
+            <a
+              onClick={SwicthBrand}
+              href="#"
+              className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
+              role="menuitem"
+              tabIndex="-1">
+              Swicth Brand
             </a>
             <a
               onClick={toggleDropdown}

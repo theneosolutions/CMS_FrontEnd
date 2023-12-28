@@ -128,14 +128,14 @@ const appRoutes = [
         element: <DashboardIndex />,
         state: "dashboard.index",
       },
-      {
-        path: "/dashboard/userlist",
-        element: <Dashboard />,
-        state: "dashboard.userlist",
-        sidebarProps: {
-          displayText: "User List",
-        },
-      },
+      // {
+      //   path: "/dashboard/userlist",
+      //   element: <Dashboard />,
+      //   state: "dashboard.userlist",
+      //   sidebarProps: {
+      //     displayText: "User List",
+      //   },
+      // },
       {
         path: "/dashboard/internal-api-tree",
         element: <InternalApiTree />,
@@ -161,137 +161,137 @@ const appRoutes = [
         },
       },
 
-      {
-        path: "/dashboard/demo",
-        element: <Demo />,
-        state: "dashboard.demo",
-        sidebarProps: {
-          displayText: "Demo",
-        },
-      },
+      // {
+      //   path: "/dashboard/demo",
+      //   element: <Demo />,
+      //   state: "dashboard.demo",
+      //   sidebarProps: {
+      //     displayText: "Demo",
+      //   },
+      // },
     ],
   },
 
-  {
-    path: "/users",
-    element: <UsersPageLayout />,
-    state: "users",
-    sidebarProps: {
-      displayText: "Users",
-      icon: <FaUser />,
-    },
-    child: [
-      {
-        index: true,
-        element: <DashboardIndex />,
-        state: "users.index",
-      },
-      {
-        path: "/users/verified",
-        element: <Verified />,
-        state: "users.verified",
-        sidebarProps: {
-          displayText: "Verified",
-        },
-      },
-      {
-        path: "/users/unverified",
-        element: <Unverified />,
-        state: "users.unverified",
-        sidebarProps: {
-          displayText: "Unverified",
-        },
-      },
-      {
-        path: "/users/dump",
-        element: <Dump />,
-        state: "users.dump",
-        sidebarProps: {
-          displayText: "Dump",
-        },
-      },
-      {
-        path: "/users/create-user",
-        element: <CreateUser />,
-        state: "users.create-user",
-        sidebarProps: {
-          displayText: "Create User",
-        },
-      },
-    ],
-  },
-  {
-    path: "/decisions",
-    element: <DecisionLayout />,
-    state: "decisions",
-    sidebarProps: {
-      displayText: "Decisions",
-      icon: <IoMdCheckboxOutline />,
-    },
-    child: [
-      {
-        index: true,
-        element: <DashboardIndex />,
-        state: "decisions.index",
-      },
-      {
-        path: "/decisions/q/a",
-        element: <QuestionsAnswers />,
-        state: "decisions.qa",
-        sidebarProps: {
-          displayText: "Question & Answers",
-        },
-      },
-      {
-        path: "/decisions/create-set",
-        element: <CreateSet />,
-        state: "decisions.create-set",
-        sidebarProps: {
-          displayText: "Create Set",
-        },
-      },
+  // {
+  //   path: "/users",
+  //   element: <UsersPageLayout />,
+  //   state: "users",
+  //   sidebarProps: {
+  //     displayText: "Users",
+  //     icon: <FaUser />,
+  //   },
+  //   child: [
+  //     {
+  //       index: true,
+  //       element: <DashboardIndex />,
+  //       state: "users.index",
+  //     },
+  //     {
+  //       path: "/users/verified",
+  //       element: <Verified />,
+  //       state: "users.verified",
+  //       sidebarProps: {
+  //         displayText: "Verified",
+  //       },
+  //     },
+  //     // {
+  //     //   path: "/users/unverified",
+  //     //   element: <Unverified />,
+  //     //   state: "users.unverified",
+  //     //   sidebarProps: {
+  //     //     displayText: "Unverified",
+  //     //   },
+  //     // },
+  //     // {
+  //     //   path: "/users/dump",
+  //     //   element: <Dump />,
+  //     //   state: "users.dump",
+  //     //   sidebarProps: {
+  //     //     displayText: "Dump",
+  //     //   },
+  //     // },
+  //     {
+  //       path: "/users/create-user",
+  //       element: <CreateUser />,
+  //       state: "users.create-user",
+  //       sidebarProps: {
+  //         displayText: "Create User",
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: "/decisions",
+  //   element: <DecisionLayout />,
+  //   state: "decisions",
+  //   sidebarProps: {
+  //     displayText: "Decisions",
+  //     icon: <IoMdCheckboxOutline />,
+  //   },
+  //   child: [
+  //     {
+  //       index: true,
+  //       element: <DashboardIndex />,
+  //       state: "decisions.index",
+  //     },
+  //     {
+  //       path: "/decisions/q/a",
+  //       element: <QuestionsAnswers />,
+  //       state: "decisions.qa",
+  //       sidebarProps: {
+  //         displayText: "Question & Answers",
+  //       },
+  //     },
+  //     {
+  //       path: "/decisions/create-set",
+  //       element: <CreateSet />,
+  //       state: "decisions.create-set",
+  //       sidebarProps: {
+  //         displayText: "Create Set",
+  //       },
+  //     },
 
-      {
-        path: "/decisions/create-decision",
-        element: <CreateDecision />,
-        state: "decisions.create-decision",
-        sidebarProps: {
-          displayText: "Create Decision",
-        },
-      },
-      {
-        path: "/decisions/all-decisions",
-        element: <AllDecisions />,
-        state: "decisions.all-decisions",
-        sidebarProps: {
-          displayText: "All Decisions",
-        },
-      },
-    ],
-  },
-  {
-    path: "/response",
-    element: <ResponsePageLayout />,
-    state: "response",
-    sidebarProps: {
-      displayText: "Response",
-      icon: <MdOutlineQuestionAnswer />,
-    },
-    child: [
-      {
-        index: true,
-        element: <Response />,
-        state: "response.index",
-      },
-      {
-        path: "/response/response",
-        element: <Response />,
-        state: "response.response",
-        sidebarProps: {
-          displayText: "Decision Responses",
-        },
-      },
-    ],
-  },
+  //     {
+  //       path: "/decisions/create-decision",
+  //       element: <CreateDecision />,
+  //       state: "decisions.create-decision",
+  //       sidebarProps: {
+  //         displayText: "Create Decision",
+  //       },
+  //     },
+  //     {
+  //       path: "/decisions/all-decisions",
+  //       element: <AllDecisions />,
+  //       state: "decisions.all-decisions",
+  //       sidebarProps: {
+  //         displayText: "All Decisions",
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: "/response",
+  //   element: <ResponsePageLayout />,
+  //   state: "response",
+  //   sidebarProps: {
+  //     displayText: "Response",
+  //     icon: <MdOutlineQuestionAnswer />,
+  //   },
+  //   child: [
+  //     {
+  //       index: true,
+  //       element: <Response />,
+  //       state: "response.index",
+  //     },
+  //     {
+  //       path: "/response/response",
+  //       element: <Response />,
+  //       state: "response.response",
+  //       sidebarProps: {
+  //         displayText: "Decision Responses",
+  //       },
+  //     },
+  //   ],
+  // },
 ];
 export default appRoutes;

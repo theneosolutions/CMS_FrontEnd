@@ -17,7 +17,9 @@ const Fonts = () => {
   const loading = useSelector((state) => state.Loading);
   const fonts = useSelector((state) => state.fonts);
   const [selecteFonts, setSelectedFonts] = useState([]); // State to hold selected checkbox IDs
+  const getfonts = useSelector((state) => state.getfonts);
 
+  console.log("getfonts", getfonts?.data?.response);
   const handleClose = () => {
     dispatch(action.Message({ open: false })); // Closing the message
   };
@@ -25,6 +27,7 @@ const Fonts = () => {
     dispatch({
       type: "GET_FONTS",
     });
+    getFontsAdmin();
   }, []);
 
   const handleCheckboxChange = (font) => {
@@ -45,14 +48,20 @@ const Fonts = () => {
       type: "SET_FONTS",
       payload: v,
     });
-    handleCheckboxChange(v);
+    // handleCheckboxChange(v);
+    getFontsAdmin();
+  }
+  function getFontsAdmin() {
+    dispatch({
+      type: "GET_FONTS_ADMIN",
+    });
   }
   return (
-    <div className="flex flex-row space-x-6">
+    <div className="flex flex-col lg:flex-row flex-col-reverse lg:space-x-6 lg:mt-0 mt-6">
       <WaveAnimation show={loading} />
 
       <CardMain
-        width="w-1/2"
+        width="lg:w-1/2 w-full mt-4 lg:mt-0"
         heading={"Set Fonts File"}
         Component={<Search setSearchInput={setSearchInput} />}>
         <div className="flex flex-row flex-wrap ">
@@ -96,7 +105,7 @@ const Fonts = () => {
           </div>
         </div>
       </CardMain>
-      <CardMain width="w-1/2 h-min" heading={"Set Fonts File"}>
+      <CardMain width="w-full lg:w-1/2 h-min " heading={"Set Fonts File"}>
         <div className="flex flex-row flex-wrap ">
           <div className="overflow-x-auto w-full">
             <table className="mt-4 w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -114,7 +123,7 @@ const Fonts = () => {
                 </tr>
               </thead>
               <tbody>
-                {selecteFonts?.map((v, k) => (
+                {getfonts?.data?.response?.map((v, k) => (
                   <tr
                     key={k}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">

@@ -125,9 +125,9 @@ function App() {
   }, [getBrand]);
   return (
     <div className="container mx-auto mt-5 space-y-6">
-      <div className="flex flex-col md:flex-row md:space-x-6 rtl:space-x-reverse">
+      <div className="flex flex-col lg:flex-row lg:space-x-6 rtl:space-x-reverse">
         <CardMain
-          width="w-full h-max md:w-1/2 md:mt-0 mt-4"
+          width="w-full h-max lg:w-1/2 lg:mt-0 mt-4"
           heading={t("Upload")}>
           <div>
             <div
@@ -176,7 +176,7 @@ function App() {
           </div>
         </CardMain>
         <CardMain
-          width=" h-max w-full md:w-1/2 md:mt-0 mt-4 "
+          width=" h-max w-full lg:w-1/2 lg:mt-0 mt-4 "
           heading={t("Preview")}>
           <div className="border  bg-secondry rounded-md border-dashed	 border-slate-200 flex flex-col px-4 py-4">
             <div className="flex flex-row  justify-between space-x-2 flex flex-end">

@@ -46,8 +46,13 @@ const DnDFlow = () => {
       event.preventDefault();
 
       const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
+      // const data=event.dataTransfer.getData("application/reactflow");
       const type = event.dataTransfer.getData("application/reactflow");
+      const data = JSON.parse(
+        event.dataTransfer.getData("application/reactflow2")
+      );
 
+      console.log("type", type, "data", data);
       // check if the dropped element is valid
       if (typeof type === "undefined" || !type) {
         return;
@@ -61,6 +66,7 @@ const DnDFlow = () => {
         id: getId(),
         type,
         position,
+        childsNodes: data,
         data: { label: `${type} node` },
       };
 
@@ -71,6 +77,7 @@ const DnDFlow = () => {
   const onSave = useCallback(() => {
     if (reactFlowInstance) {
       const flow = reactFlowInstance.toObject();
+      console.log("fleeeeee", flow);
       localStorage.setItem(flowKey, JSON.stringify(flow));
     }
   }, [reactFlowInstance]);

@@ -15,15 +15,8 @@ import Sidebar from "./sidebar";
 
 import "./index.css";
 
-const initialNodes = [
-  {
-    id: "1",
-    type: "input",
-    data: { label: "input node" },
-    position: { x: 250, y: 5 },
-  },
-];
-const flowKey = "example-flow";
+const initialNodes = [];
+const flowKey = "flow";
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
@@ -35,7 +28,7 @@ const DnDFlow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-
+  const [name, setName] = useState("");
   const { setViewport } = useReactFlow();
 
   const onConnect = useCallback(
@@ -75,12 +68,42 @@ const DnDFlow = () => {
     },
     [reactFlowInstance]
   );
-  const onSave = useCallback(() => {
-    if (reactFlowInstance) {
-      const flow = reactFlowInstance.toObject();
-      localStorage.setItem(flowKey, JSON.stringify(flow));
-    }
-  }, [reactFlowInstance]);
+  const onSave = useCallback(
+    (v) => {
+      if (reactFlowInstance) {
+        // Retrieve existing array from local storage
+        const existingData = JSON.parse(localStorage.getItem(flowKey)) || [];
+
+        // Check if an object with the same name already exists
+        const existingIndex = existingData.findIndex((item) => item.name === v);
+
+        // Retrieve flow data from reactFlowInstance
+        const flow = reactFlowInstance.toObject();
+
+        // Create a new object with the given name and flow data
+        const newData = {
+          type: v,
+          label: v,
+          data: flow,
+        };
+
+        if (existingIndex !== -1) {
+          // Update the existing object if it already exists
+          existingData[existingIndex] = newData;
+        } else {
+          // Add the new object to the existing array
+          existingData.push(newData);
+        }
+
+        // Save the updated array to local storage
+        localStorage.setItem(flowKey, JSON.stringify(existingData));
+
+        console.log("Updated data:", existingData);
+      }
+    },
+    [reactFlowInstance]
+  );
+
   const onRestore = useCallback(() => {
     const restoreFlow = async () => {
       const flow = JSON.parse(localStorage.getItem(flowKey));
@@ -103,7 +126,7 @@ const DnDFlow = () => {
 
   return (
     <div className="dndflow">
-      <Sidebar />
+      <Sidebar name={name} setName={(e) => setName(e)} />
       <div className="reactflow-wrapper" ref={reactFlowWrapper}>
         <ReactFlow
           nodes={nodes}
@@ -122,7 +145,7 @@ const DnDFlow = () => {
             <div className="px-4 rtl:space-x-reverse">
               <button
                 className="duration-200 bg-green-400 m-2  text-white  rtl:space-x-reverse py-2 px-5 rounded-md  hover:bg-green-500 cursor-pointer "
-                onClick={onSave}>
+                onClick={() => onSave(name)}>
                 Save
               </button>
               <button

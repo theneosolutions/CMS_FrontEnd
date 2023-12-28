@@ -8,7 +8,7 @@ var baseUrlUser = "https://6b49-182-180-180-140.ngrok-free.app";
 var baseUrlDecisions =
   "https://2146-2a00-5400-e053-7ddb-28c6-f8a3-45fd-17fc.ngrok-free.app/api/v1/dms";
 var baseUrlCMS =
-  "https://cee9-2a00-5400-e053-7ddb-9826-b837-7e11-9861.ngrok-free.app/api/v1/cms";
+  "https://1713-2a00-5400-e053-7ddb-9411-4b7c-8f0b-32af.ngrok-free.app/api/v1/cms";
 
 function* GetAllQuestionsData() {
   try {
@@ -607,7 +607,32 @@ function* GetFonts({ payload }) {
     yield put(action.Message({ message: message, open: true, error: true }));
   }
 }
+function* GetFontsAdmin({ payload }) {
+  console.log("helooooo admin fonts");
+  try {
+    yield put(action.Loading({ Loading: true }));
 
+    const response = yield call(
+      axios.get,
+      baseUrlCMS +
+        `/brandFont/fontFamily/getFontFamilyForAdmin?brandId=${BrandId()}`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "69420",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("response responseresponse fonts admin", response);
+    yield put(action.GetFontsAdmin(response));
+    yield put(action.Loading({ Loading: false }));
+  } catch (error) {
+    const message = error.response.data.message;
+    yield put(action.Loading({ Loading: false }));
+
+    yield put(action.Message({ message: message, open: true, error: true }));
+  }
+}
 // function* CreateSlide({ payload }) {
 //   console.log("payload CreateSlide", payload);
 //   const formData = new FormData();
@@ -665,4 +690,5 @@ export default function* HomeSaga() {
   yield takeLatest("ADD_SLIDE_TO_SLIDER", CreateSlide);
   yield takeLatest("GET_ALL_SLIDERS", GetAllSliders);
   yield takeLatest("GET_FONTS", GetFonts);
+  yield takeLatest("GET_FONTS_ADMIN", GetFontsAdmin);
 }

@@ -31,6 +31,7 @@ const initialState = {
   getLogo: {},
   getSingleBrand: brand || {},
   fonts: [],
+  getfonts: {},
 };
 const Reducer = createSlice({
   name: "seulah",
@@ -123,6 +124,10 @@ const Reducer = createSlice({
       const { data } = action.payload;
       state.fonts = data;
     },
+    GetFontsAdmin: (state, action) => {
+      const { data } = action.payload;
+      state.getfonts = data;
+    },
     GetSingleBrand: (state, action) => {
       const { data } = action.payload;
       console.log("what the hell is this ? ", data);
@@ -157,6 +162,7 @@ export const {
   GetSingleBrand,
   GetAllSliders,
   GetFonts,
+  GetFontsAdmin,
 } = Reducer.actions;
 
 export default Reducer.reducer;

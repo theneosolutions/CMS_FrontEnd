@@ -45,7 +45,7 @@ function CreateBrand() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row  space-x-4 bg-gray-200 mt-5 md:mt-0">
+    <div className="flex flex-col md:flex-row  md:space-x-4 bg-gray-200 mt-5 md:mt-0">
       <WaveAnimation show={loading} />
 
       <CardMain width="w-full md:w-1/2" heading={"Create Slider"}>
