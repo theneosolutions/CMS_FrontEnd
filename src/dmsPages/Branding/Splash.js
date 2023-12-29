@@ -97,7 +97,7 @@ function App() {
     // formData.append("file2", image2);
     // formData.append("file3", image3);
     // formData.append("file4", image4);
-    formData.append("brandId", "65826de5d127bc5c79164e7a");
+    formData.append("brandId", BrandId());
 
     // const data = {
     //   image: image,

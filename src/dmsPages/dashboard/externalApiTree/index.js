@@ -14,6 +14,7 @@ import "reactflow/dist/style.css";
 import Sidebar from "./sidebar";
 
 import "./index.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const initialNodes = [];
 const flowKey = "example-flow";
@@ -22,6 +23,8 @@ let id = 0;
 const getId = () => `dndnode_${id++}`;
 
 const DnDFlow = () => {
+  const dispatch = useDispatch();
+
   const reactFlowWrapper = useRef(null);
   const edgeUpdateSuccessful = useRef(true);
 
@@ -77,10 +80,17 @@ const DnDFlow = () => {
   const onSave = useCallback(() => {
     if (reactFlowInstance) {
       const flow = reactFlowInstance.toObject();
-      console.log("fleeeeee", flow);
+      console.log("fleeeeee external", flow);
+      onSaveFunction(flow);
       localStorage.setItem(flowKey, JSON.stringify(flow));
     }
   }, [reactFlowInstance]);
+  function onSaveFunction(payload) {
+    dispatch({
+      type: "SAVE_API_TREE",
+      payload: payload,
+    });
+  }
   const onRestore = useCallback(() => {
     const restoreFlow = async () => {
       const flow = JSON.parse(localStorage.getItem(flowKey));

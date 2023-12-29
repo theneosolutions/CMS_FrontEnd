@@ -7,8 +7,7 @@ import { BrandId } from "funtions/BrandId";
 var baseUrlUser = "https://6b49-182-180-180-140.ngrok-free.app";
 var baseUrlDecisions =
   "https://2146-2a00-5400-e053-7ddb-28c6-f8a3-45fd-17fc.ngrok-free.app/api/v1/dms";
-var baseUrlCMS =
-  "https://1713-2a00-5400-e053-7ddb-9411-4b7c-8f0b-32af.ngrok-free.app/api/v1/cms";
+var baseUrlCMS = "https://bc7f-182-188-103-146.ngrok-free.app/api/v1/cms";
 
 function* GetAllQuestionsData() {
   try {
@@ -633,34 +632,47 @@ function* GetFontsAdmin({ payload }) {
     yield put(action.Message({ message: message, open: true, error: true }));
   }
 }
-// function* CreateSlide({ payload }) {
-//   console.log("payload CreateSlide", payload);
-//   const formData = new FormData();
-//   formData.append("file", payload.image);
+function* GetEndpoints({ payload }) {
+  console.log("helooooo admin endpoints");
+  try {
+    yield put(action.Loading({ Loading: true }));
 
-//   try {
-//     yield put(action.Loading({ Loading: true }));
+    const response = yield call(axios.get, baseUrlCMS + `/appFlow/getAll`, {
+      headers: {
+        "ngrok-skip-browser-warning": "69420",
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("response responseresponse APP FLOW admin", response.data);
+    yield put(action.GetEndpoints(response.data));
+    yield put(action.Loading({ Loading: false }));
+  } catch (error) {
+    const message = error.response.data.message;
+    yield put(action.Loading({ Loading: false }));
 
-//     const response = yield call(
-//       axios.post,
-//       baseUrlCMS +
-//         `/brandSplashScreen/brandingSliderScreen?mainTittle=${payload.mainTitle}&brandId=${payload.brandId}&desc=${payload.description}&title=${payload.title}&position=${payload.position}`,
-//       formData,
-//       {
-//         headers: {
-//           "Content-Type": "multipart/form-data", // Important for file uploads
-//         },
-//       }
-//     );
-//     const message = response?.data?.message;
-//     yield put(action.Loading({ Loading: false }));
-//     yield put(action.Message({ message: message, open: true, error: false }));
-//   } catch (error) {
-//     yield put(action.Loading({ Loading: false }));
-//     const message = error.response.data.message;
-//     yield put(action.Message({ message: message, open: true, error: true }));
-//   }
-// }
+    yield put(action.Message({ message: message, open: true, error: true }));
+  }
+}
+function* SaveApiTree({ payload }) {
+  console.log("payload tree hai bhai tree", payload);
+
+  try {
+    yield put(action.Loading({ Loading: true }));
+
+    const response = yield call(
+      axios.post,
+      baseUrlCMS + `/apiFlow/saveApiFlow?brandId=${BrandId()}`,
+      payload
+    );
+    const message = response?.data?.message;
+    yield put(action.Loading({ Loading: false }));
+    yield put(action.Message({ message: message, open: true, error: false }));
+  } catch (error) {
+    yield put(action.Loading({ Loading: false }));
+    const message = error.response.data.message;
+    yield put(action.Message({ message: message, open: true, error: true }));
+  }
+}
 export default function* HomeSaga() {
   yield takeLatest("ADD_QUESTION", AddQuestions);
   yield takeLatest("GET_ALL_QUESTIONS", GetAllQuestionsData);
@@ -691,4 +703,6 @@ export default function* HomeSaga() {
   yield takeLatest("GET_ALL_SLIDERS", GetAllSliders);
   yield takeLatest("GET_FONTS", GetFonts);
   yield takeLatest("GET_FONTS_ADMIN", GetFontsAdmin);
+  yield takeLatest("GET_ENDPOINTS", GetEndpoints);
+  yield takeLatest("SAVE_API_TREE", SaveApiTree);
 }

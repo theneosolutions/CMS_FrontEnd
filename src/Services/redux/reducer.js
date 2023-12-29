@@ -32,6 +32,7 @@ const initialState = {
   getSingleBrand: brand || {},
   fonts: [],
   getfonts: {},
+  endpoints: {},
 };
 const Reducer = createSlice({
   name: "seulah",
@@ -128,9 +129,12 @@ const Reducer = createSlice({
       const { data } = action.payload;
       state.getfonts = data;
     },
+    GetEndpoints: (state, action) => {
+      const { data } = action.payload;
+      state.endpoints = data;
+    },
     GetSingleBrand: (state, action) => {
       const { data } = action.payload;
-      console.log("what the hell is this ? ", data);
       return {
         ...state,
         getSingleBrand: data,
@@ -163,6 +167,7 @@ export const {
   GetAllSliders,
   GetFonts,
   GetFontsAdmin,
+  GetEndpoints,
 } = Reducer.actions;
 
 export default Reducer.reducer;

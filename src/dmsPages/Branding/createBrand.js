@@ -20,8 +20,6 @@ function CreateBrand() {
   const error = useSelector((state) => state.error);
   const loading = useSelector((state) => state.Loading);
   const getBrands = useSelector((state) => state.getAllBrands);
-  const getBrand = useSelector((state) => state.getSingleBrand);
-  console.log("getSingleBrand state", getBrand);
 
   const handleClose = () => {
     dispatch(action.Message({ open: false })); // Closing the message
@@ -56,11 +54,6 @@ function CreateBrand() {
       payload: v,
     });
   }
-  // useEffect(() => {
-  //   if (getBrand) {
-  //     navigate("/dashboard/userlist");
-  //   }
-  // }, [getBrand]);
 
   return (
     <div className="flex flex-row  space-x-4 bg-gray-200 h-screen px-10 py-10">
@@ -125,7 +118,6 @@ function InputField({ heading, value, onChange, type }) {
       <a className="text-sm text-gray-700">{heading}</a>
 
       <input
-        // required
         type={type || "text"}
         value={value}
         onChange={(e) => onChange(e.target.value)}
