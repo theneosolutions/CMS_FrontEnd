@@ -34,8 +34,6 @@ function App() {
   const fileInputRef = useRef(null); // Create a ref for the file input
   const getBrand = useSelector((state) => state.getSingleBrand);
 
-  console.log("getSingleBrand", getBrand);
-
   const handleClose = () => {
     dispatch(action.Message({ open: false }));
   };
@@ -46,32 +44,36 @@ function App() {
     if (e.target.files && e.target.files[0]) {
       const selectedImage = e.target.files[0];
 
-      // Create a FileReader to read the dimensions of the selected image
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const img = new Image();
-        img.src = event.target.result;
+      // Check if the selected file is either PNG or SVG
+      if (
+        selectedImage.type === "image/png" ||
+        selectedImage.type === "image/svg+xml"
+      ) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.src = event.target.result;
 
-        // Set the height and width based on the image dimensions
-        img.onload = () => {
-          setHeightInitial(img.height);
-          setWidthInitial(img.width);
-          setHeight(img.height);
-          setWidth(img.width);
+          img.onload = () => {
+            setHeightInitial(img.height);
+            setWidthInitial(img.width);
+            setHeight(img.height);
+            setWidth(img.width);
+          };
         };
-      };
-
-      reader.readAsDataURL(selectedImage);
-
-      // Set the file in the state
-      setImage(selectedImage);
-      setImage2(URL.createObjectURL(selectedImage));
+        reader.readAsDataURL(selectedImage);
+        setImage(selectedImage);
+        setImage2(URL.createObjectURL(selectedImage));
+      } else {
+        // Show an alert if the file type is not PNG or SVG
+        alert("Please upload a PNG or SVG file.");
+        // Optionally, you can reset the file input to clear the selected file
+        e.target.value = null;
+      }
     }
   }
 
   function setContent() {
-    console.log("height", height, "width", width);
-
     // Convert the height and width values to numbers
     const newHeight = parseFloat(height);
     const newWidth = parseFloat(width);
@@ -100,7 +102,6 @@ function App() {
       type: "CREATE_LOGO",
       payload: data,
     });
-    // console.log("helo");
     setTimeout(() => getBrandData(), 1000);
   }
 
@@ -115,14 +116,12 @@ function App() {
       setImage2(
         `data:image/jpeg;base64,${getBrand?.brandingLogoDetail?.brandLogoContent}`
       );
-      console.log(
-        "getBrand?.brandingLogoDetail?.brandLogo?.height",
-        getBrand?.brandingLogoDetail?.brandLogo?.height
-      );
+
       setHeight(getBrand?.brandingLogoDetail?.brandLogo?.height);
       setWidth(getBrand?.brandingLogoDetail?.brandLogo?.width);
     }
   }, [getBrand]);
+  console.log("image", image?.name, image2);
   return (
     <div className="container mx-auto mt-5 space-y-6">
       <div className="flex flex-col lg:flex-row lg:space-x-6 rtl:space-x-reverse">
@@ -141,38 +140,18 @@ function App() {
                 </span>
               </a>
               <a className="text-xs text-gray-600 mt-3">
-                Supported formates: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT
+                Supported formates: PNG , SVG
               </a>
             </div>
             <div className="mt-2">
               <a className="text-xs opacity-70 font-semibold">
-                Uploading - 3/3 files
+                Uploading - 1/1 files
               </a>
             </div>
 
             <div className="text-xs  px-4  border border-gray-100 h-full py-2 text-gray-700 w-full mt-2 rounded-full">
-              your-file-here.PDF
+              {image?.name ? image?.name : "your-file-here.png"}
             </div>
-
-            <div className="mt-2">
-              <a className="text-xs opacity-70 font-semibold">Uploaded</a>
-            </div>
-            <div className="flex flex-row justify-between text-xs  px-4  border border-green-400 h-full py-2 text-gray-700 w-full mt-2 rounded-full">
-              <a>Logo.png</a>
-              <a>
-                <FaEye className="text-base text-primary cursor-pointer" />
-              </a>
-            </div>
-            <div className="flex flex-row justify-between text-xs  px-4  border border-green-400 h-full py-2 text-gray-700 w-full mt-2 rounded-full">
-              <a>Logo.png</a>
-              <a>
-                <FaEye className="text-base text-primary cursor-pointer" />
-              </a>
-            </div>
-            <Button
-              buttonValue="UPLOAD FILES"
-              buttonStyle="w-full my-2 mt-5 text-xs font-semibold "
-            />
           </div>
         </CardMain>
         <CardMain

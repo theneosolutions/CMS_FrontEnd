@@ -1,17 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import CardMain from "../../Components/Cards/main";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import * as action from "../../Services/redux/reducer";
-import { Alert, Snackbar } from "@mui/material";
 import UplaodIcon from "../../Assets/dms/Images/uplaod.svg";
 import { Button } from "../../Components";
 import { PiImageThin } from "react-icons/pi";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Lottie from "lottie-react";
-import WaveAnimation from "Components/Loading"; // Adjust the path based on your file structure
-import { BrandId } from "funtions/BrandId";
 
 function App({
   lottieOptions,
@@ -27,27 +22,7 @@ function App({
   setPosition,
 }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-
-  //   const [lottieOptions, setLottieOptions] = useState(null);
-
-  //   const [image, setImage] = useState(null);
-
   const fileInputRef = useRef(null); // Create a ref for the file input
-  const getBrand = useSelector((state) => state.getSingleBrand);
-  useEffect(() => {
-    if (getBrand?.brandingSplashScreen) {
-      // console.log(
-      //   "getBrand?.brandingSplashScreen",
-      //   getBrand?.brandingSplashScreen
-      // );
-      // setLottieOptions(JSON.parse(getBrand?.brandingSplashScreen));
-    }
-  }, []);
-
-  const handleClose = () => {
-    dispatch(action.Message({ open: false }));
-  };
 
   function handleClick() {
     fileInputRef.current.click();
@@ -79,9 +54,7 @@ function App({
           e.target.value = null;
         }
       } else {
-        // Display an error message for non-JSON files
         alert("Please upload a JSON file (Lottie File).");
-        // Optionally, you can reset the file input
         e.target.value = null;
       }
     }
@@ -92,27 +65,12 @@ function App({
     setLottieOptions(null);
   };
 
-  function CreateSplash() {
-    const data = {
-      image: image,
-    };
-    dispatch({
-      type: "CREATE_SPLASH",
-      payload: data,
-    });
-    setTimeout(() => getBrandData(), 1000);
-  }
-  function getBrandData() {
-    dispatch({
-      type: "GET_SINGLE_BRAND",
-      payload: BrandId(),
-    });
-  }
-
   return (
     <div className="mt-5  w-full">
-      <div className="flex flex-col md:flex-row w-full space-x-5">
-        <CardMain width="w-1/2 h-max  md:mt-0 mt-4" heading={t("Upload")}>
+      <div className="flex flex-col md:flex-row w-full md:space-x-5">
+        <CardMain
+          width="md:w-1/2 w-full h-max  md:mt-0 mt-4"
+          heading={t("Upload")}>
           <div>
             <div
               onClick={handleClick}
@@ -171,7 +129,7 @@ function App({
             buttonStyle="w-full my-2 mt-5 text-xs font-semibold "
           />
         </CardMain>
-        <div className="md:mt-0 mt-4 w-1/2 ">
+        <div className="md:mt-0 mt-4 md:w-1/2 w-full ">
           <CardMain
             width=" h-max w-full md:w-full md:mt-0 mt-4 "
             heading={t("Preview")}>
@@ -188,12 +146,7 @@ function App({
                   <PiImageThin className="text-primary h-44  w-full" />
                 )}
                 <div className="">
-                  <Lottie
-                    animationData={lottieOptions}
-                    loop={true}
-                    // height={200}
-                    // width={200}
-                  />
+                  <Lottie animationData={lottieOptions} loop={true} />
                 </div>
               </div>
             </div>
