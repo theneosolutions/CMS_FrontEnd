@@ -102,6 +102,7 @@ function App() {
       type: "CREATE_LOGO",
       payload: data,
     });
+
     setTimeout(() => getBrandData(), 1000);
   }
 
@@ -111,6 +112,7 @@ function App() {
       payload: BrandId(),
     });
   }
+  console.log("selectedImageselectedImageselectedImageselectedImage", image);
   useEffect(() => {
     if (getBrand?.brandingLogoDetail?.brandLogoContent) {
       setImage2(
