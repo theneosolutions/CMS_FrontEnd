@@ -50,7 +50,7 @@ function TestPage() {
   };
 
   return (
-    <div className="flex md:flex-row flex-col md:space-x-4 md:space-y-0 space-y-3 mt-5 md:mt-0   w-full ">
+    <div className="flex md:flex-row flex-col md:space-x-4 md:space-y-0 space-y-3 mt-5 md:mt-0 w-full flex w-full ">
       <div
         className={`${
           state ? "w-full md:w-1/5" : "w-full md:w-min"
@@ -68,48 +68,33 @@ function TestPage() {
           state ? "w-full md:w-4/5" : "w-full"
         }	rounded-lg flex p-4  bg-gray-100 flex flex-row space-x-4 	`}>
         <WaveAnimation show={loading} />
-        <div className="flex flex-wrap ">
-          {getAppFlowData?.appFlow?.screenFlow?.map((v, k) => {
-            return (
+        <div className="flex flex-wrap">
+          {getAppFlowData?.appFlow?.screenFlow?.map((v, k) => (
+            <div
+              onDoubleClick={() => (handleSidebarToggle(), setActive(v))}
+              // onClick={() => (handleSidebarToggle(), setActive(v))}
+              className="w-full md:w-48 px-2 cursor-pointer"
+              ref={(ref) => (divRefs.current[v.name] = ref)}
+              tabIndex={0}>
               <div
-                className="w-full md:w-52 px-2 "
-                ref={(ref) => (divRefs.current[v.name] = ref)}
-                tabIndex={0}>
-                <div
-                  className={`relative mt-4 w-full  h-96 bg-white border-4 ${
-                    activeSideScreen === v.name
-                      ? "border-primary shadow-2xl"
-                      : "border-black"
-                  } rounded-3xl overflow-hidden`}>
-                  <div className="w-full h-6 bg-gray-800 rounded-t-3xl justify-center flex text-white text-xs items-center pb-1">
-                    {k + 1} - {v?.name}
-                  </div>
-                  <div className="w-full h-80 bg-gray-100 px-3 py-3 space-y-3 flex flex-col">
-                    {v?.button.map((o, l) => {
-                      return (
-                        <Tooltip
-                          text={
-                            o?.navigationLink
-                              ? o?.navigationLink
-                              : "Navigation Not Set"
-                          }>
-                          <button
-                            onClick={() => (
-                              handleSidebarToggle(), setActive(v)
-                            )}
-                            className={`border border-gray-200 rounded-lg text-sm w-full py-1 ${
-                              o?.navigationLink && "bg-green-200"
-                            }`}>
-                            <a className="text-sm">{o.name}</a>
-                          </button>
-                        </Tooltip>
-                      );
-                    })}
-                  </div>
+                className={`relative mt-4 w-full  bg-white border-4 ${
+                  activeSideScreen === v.name
+                    ? "border-primary shadow-2xl"
+                    : "border-black"
+                } rounded-3xl overflow-hidden`}>
+                <div className="w-full h-6 bg-gray-800 justify-center flex text-white text-xs items-center pb-1">
+                  {k + 1} - {v?.name}
+                </div>
+                <div className="w-full h-full">
+                  <img
+                    src={v?.components?.lottieFile}
+                    className="w-full h-full object-cover" // Remove pb-6 to eliminate bottom padding
+                    alt="Your Image Alt Text"
+                  />
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
 
         <div>
@@ -242,3 +227,28 @@ const data = [
     },
   },
 ];
+
+{
+  /* <div className="w-full h-80 bg-gray-100 px-3 py-3 space-y-3 flex flex-col">
+                    {v?.button.map((o, l) => {
+                      return (
+                        <Tooltip
+                          text={
+                            o?.navigationLink
+                              ? o?.navigationLink
+                              : "Navigation Not Set"
+                          }>
+                          <button
+                            onClick={() => (
+                              handleSidebarToggle(), setActive(v)
+                            )}
+                            className={`border border-gray-200 rounded-lg text-sm w-full py-1 ${
+                              o?.navigationLink && "bg-green-200"
+                            }`}>
+                            <a className="text-sm">{o.name}</a>
+                          </button>
+                        </Tooltip>
+                      );
+                    })}
+                  </div> */
+}
