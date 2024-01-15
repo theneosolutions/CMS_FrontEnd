@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Sidebar from "./sidebar";
 import { Button, Tooltip } from "Components";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Snackbar } from "@mui/material";
 import WaveAnimation from "Components/Loading"; // Adjust the path based on your file structure
 import * as action from "Services/redux/reducer";
-import { MdCloseFullscreen } from "react-icons/md";
-import { FaCaretRight } from "react-icons/fa";
+import LeftSideBar from "./leftSidebar";
 
 function TestPage() {
   const dispatch = useDispatch();
@@ -17,8 +16,9 @@ function TestPage() {
   const loading = useSelector((state) => state.Loading);
   const [isSidebarOpen, setSidebarOpen] = React.useState(false);
   const [state, setState] = React.useState(true);
+  const [activeSideScreen, setActiveSideScreen] = React.useState("");
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const divRefs = useRef({});
 
   const [active, setActive] = useState();
   const handleSidebarToggle = () => {
@@ -35,28 +35,52 @@ function TestPage() {
   const handleClose = () => {
     dispatch(action.Message({ open: false }));
   };
-  const filteredNodes = getAppFlowData?.appFlow?.screenFlow?.filter((node) =>
-    node?.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  console.log("sate", state);
+
+  const handleInputChange = (value) => {
+    const matchingDiv = getAppFlowData?.appFlow?.screenFlow.find(
+      (div) => div.name.toLowerCase() === value.toLowerCase()
+    );
+    if (matchingDiv) {
+      divRefs.current[matchingDiv.name].scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+      setActiveSideScreen(matchingDiv.name);
+    }
+  };
+
   return (
-    <div className="flex md:flex-row flex-col md:space-x-4 md:space-y-0 space-y-3 mt-5 md:mt-0">
-      <LeftSideBar
-        state={state}
-        setState={(e) => setState(e)}
-        getAppFlowData={getAppFlowData}
-      />
+    <div className="flex md:flex-row flex-col md:space-x-4 md:space-y-0 space-y-3 mt-5 md:mt-0   w-full ">
+      <div
+        className={`${
+          state ? "w-full md:w-1/5" : "w-full md:w-min"
+        }		bg-gray-100  items-center rounded-lg h-max `}>
+        <LeftSideBar
+          state={state}
+          setState={(e) => setState(e)}
+          getAppFlowData={getAppFlowData}
+          onClick={(e) => handleInputChange(e)}
+        />
+      </div>
 
       <div
         className={`${
-          state ? "w-4/5" : "w-full"
+          state ? "w-full md:w-4/5" : "w-full"
         }	rounded-lg flex p-4  bg-gray-100 flex flex-row space-x-4 	`}>
         <WaveAnimation show={loading} />
         <div className="flex flex-wrap ">
           {getAppFlowData?.appFlow?.screenFlow?.map((v, k) => {
             return (
-              <div className="w-52 px-2">
-                <div className="relative mt-4 w-full  h-96 bg-white border-4 border-black rounded-3xl overflow-hidden">
+              <div
+                className="w-full md:w-52 px-2 "
+                ref={(ref) => (divRefs.current[v.name] = ref)}
+                tabIndex={0}>
+                <div
+                  className={`relative mt-4 w-full  h-96 bg-white border-4 ${
+                    activeSideScreen === v.name
+                      ? "border-primary shadow-2xl"
+                      : "border-black"
+                  } rounded-3xl overflow-hidden`}>
                   <div className="w-full h-6 bg-gray-800 rounded-t-3xl justify-center flex text-white text-xs items-center pb-1">
                     {k + 1} - {v?.name}
                   </div>
@@ -154,57 +178,6 @@ function InputField({ heading, value, onChange, type }) {
         onChange={(e) => onChange(e.target.value)}
         className="border-primary border rounded-md px-3 py-1 outline-none mt-2 w-full"
       />
-    </div>
-  );
-}
-
-function LeftSideBar({ state, setState, getAppFlowData }) {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const filteredNodes = getAppFlowData?.appFlow?.screenFlow?.filter((node) =>
-    node?.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  return (
-    <div
-      className={`${
-        state ? "w-1/5" : "w-min"
-      }		bg-gray-100  items-center rounded-lg h-max `}>
-      {state ? (
-        <div className="px-3 py-3 ">
-          {" "}
-          <div className="flex flex-row justify-between w-full">
-            <a className="underline uppercase text-sm  justify-center text-center flex mb-2 text-lg font-semibold opacity-70">
-              Screens
-            </a>
-            <MdCloseFullscreen
-              onClick={() => setState(!state)}
-              className="text-primary cursor-pointer hover:opacity-70 duration-200 text-lg"
-            />
-          </div>
-          <input
-            className="text-sm w-full py-1 px-2 border-gray-300 border-2 rounded-sm outline-none"
-            type="text"
-            placeholder="Search Screen..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <div className="flex flex-col space-y-3 mt-4">
-            {filteredNodes?.map((v, k) => {
-              return (
-                <div className="cursor-pointer  hover:bg-gray-200  duration-200 shadow-lg text-sm text-gray-700 opacity-80 w-full py-1 px-2 border-gray-300 border rounded-sm text-center">
-                  {v.name}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ) : (
-        <div
-          className=" flex flex-col 	cursor-pointer p-2 "
-          onClick={() => setState(!state)}>
-          <FaCaretRight className="text-primary  hover:opacity-70 duration-200 text-2xl" />
-        </div>
-      )}
     </div>
   );
 }
