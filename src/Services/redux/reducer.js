@@ -33,6 +33,7 @@ const initialState = {
   fonts: [],
   getfonts: {},
   endpoints: {},
+  getAppFlow: {},
 };
 const Reducer = createSlice({
   name: "seulah",
@@ -140,6 +141,10 @@ const Reducer = createSlice({
         getSingleBrand: data,
       };
     },
+    GetappFlow: (state, action) => {
+      const { data } = action.payload;
+      state.getAppFlow = data;
+    },
   },
 });
 export const {
@@ -168,6 +173,7 @@ export const {
   GetFonts,
   GetFontsAdmin,
   GetEndpoints,
+  GetappFlow,
 } = Reducer.actions;
 
 export default Reducer.reducer;

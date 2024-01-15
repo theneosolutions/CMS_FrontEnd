@@ -672,6 +672,27 @@ function* SaveApiTree({ payload }) {
     yield put(action.Message({ message: message, open: true, error: true }));
   }
 }
+function* GetAppFlow() {
+  try {
+    yield put(action.Loading({ Loading: true }));
+    const response = yield call(
+      axios.get,
+      baseUrlCMS + `/apiFlow/getAppFlow?brandId=123`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "69420",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    yield put(action.GetappFlow(response));
+    yield put(action.Loading({ Loading: false }));
+  } catch (error) {
+    const message = error.response.data.message;
+    yield put(action.Loading({ Loading: false }));
+    yield put(action.Message({ message: message, open: true, error: true }));
+  }
+}
 export default function* HomeSaga() {
   yield takeLatest("ADD_QUESTION", AddQuestions);
   yield takeLatest("GET_ALL_QUESTIONS", GetAllQuestionsData);
@@ -704,4 +725,5 @@ export default function* HomeSaga() {
   yield takeLatest("GET_FONTS_ADMIN", GetFontsAdmin);
   yield takeLatest("GET_ENDPOINTS", GetEndpoints);
   yield takeLatest("SAVE_API_TREE", SaveApiTree);
+  yield takeLatest("GET_APP_FLOW", GetAppFlow);
 }

@@ -33,7 +33,7 @@ import Fonts from "dmsPages/Branding/Fonts";
 import Slider from "dmsPages/Branding/Slider";
 import InternalApiTree from "dmsPages/dashboard/internalApiTree";
 import ExternalApiTree from "dmsPages/dashboard/externalApiTree";
-
+import Screens from "Pages/Dashboard/Screens";
 const appRoutes = [
   {
     index: true,
@@ -158,6 +158,14 @@ const appRoutes = [
         state: "dashboard.application",
         sidebarProps: {
           displayText: "Applications",
+        },
+      },
+      {
+        path: "/dashboard/screens",
+        element: <Screens />,
+        state: "dashboard.screens",
+        sidebarProps: {
+          displayText: "Screens",
         },
       },
 
