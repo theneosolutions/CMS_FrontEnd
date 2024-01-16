@@ -67,7 +67,7 @@ function App({
 
   return (
     <div className="mt-5  w-full">
-      <div className="flex flex-col md:flex-row w-full md:space-x-5">
+      <div className="flex flex-col md:flex-col w-full md:space-x-5">
         <CardMain
           width="md:w-1/2 w-full h-max  md:mt-0 mt-4"
           heading={t("Upload")}>

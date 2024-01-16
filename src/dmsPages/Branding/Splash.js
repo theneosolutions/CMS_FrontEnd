@@ -31,14 +31,13 @@ function App() {
   };
 
   function CreateSplash() {
-    console.log("helooooo");
-    // const formData = new FormData();
-    // formData.append("file", image1);
-    // formData.append("brandId", BrandId());
-    // dispatch({
-    //   type: "CREATE_SPLASH",
-    //   payload: formData,
-    // });
+    const formData = new FormData();
+    formData.append("file", image1);
+    formData.append("brandId", BrandId());
+    dispatch({
+      type: "CREATE_SPLASH",
+      payload: formData,
+    });
   }
 
   return (

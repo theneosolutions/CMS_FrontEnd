@@ -98,6 +98,8 @@ function App() {
       width: mainwidth,
       image: image,
     };
+
+    console.log("this is data ", data);
     dispatch({
       type: "CREATE_LOGO",
       payload: data,
@@ -143,15 +145,6 @@ function App() {
                 Supported formates: PNG , SVG
               </a>
             </div>
-            {/* <div className="mt-2">
-              <a className="text-xs opacity-70 font-semibold">
-                Uploading - 1/1 files
-              </a>
-            </div>
-
-            <div className="text-xs  px-4  border border-gray-100 h-full py-2 text-gray-700 w-full mt-2 rounded-full">
-              {image?.name ? image?.name : "your-file-here.png"}
-            </div> */}
           </div>
         </CardMain>
         <CardMain
@@ -206,25 +199,25 @@ function App() {
           <div className="flex flex-col md:flex-row justify-between">
             <div></div>
             <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-6 mt-10 mb-4">
-              <div className="flex space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-red-400 cursor-pointer border text-gray-700 text-center">
+              <div
+                onClick={resetImageSizes}
+                className="flex space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-red-400 cursor-pointer border text-gray-700 text-center">
                 <RxReset className="text-gray-500 cursor-pointer" />
-                <a onClick={resetImageSizes} className="">
-                  Reset
-                </a>
+                <a className="">Reset</a>
               </div>
 
-              <div className="flex space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-blue-400 cursor-pointer border text-gray-700 text-center">
+              <div
+                onClick={() => setContent()}
+                className="flex space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-blue-400 cursor-pointer border text-gray-700 text-center">
                 <RxUpdate className="text-gray-500 cursor-pointer" />
-                <a onClick={() => setContent()} className="">
-                  Update Pixels
-                </a>
+                <a className="">Update Pixels</a>
               </div>
 
-              <div className="text-white flex bg-primary space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-blue-400 cursor-pointer border text-center">
+              <div
+                onClick={() => CreateLogo()}
+                className="hover:opacity-80 text-white flex bg-primary space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full duration-200 cursor-pointer border text-center">
                 <FaRegSave className="text-white cursor-pointer" />
-                <a onClick={CreateLogo} className="">
-                  Save
-                </a>
+                <a className="">Save</a>
               </div>
             </div>
           </div>
