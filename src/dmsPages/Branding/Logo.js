@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import * as action from "../../Services/redux/reducer";
 import { Alert, Snackbar } from "@mui/material";
 import UplaodIcon from "../../Assets/dms/Images/uplaod.svg";
-import { FaEye } from "react-icons/fa";
-import { Button } from "../../Components";
 import { PiImageThin } from "react-icons/pi";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { useNavigate, useLocation } from "react-router-dom";
 import { BrandId } from "funtions/BrandId";
+import { RxReset } from "react-icons/rx";
+import { RxUpdate } from "react-icons/rx";
+import { FaRegSave } from "react-icons/fa";
 
 function App() {
   const { t } = useTranslation();
@@ -112,40 +112,38 @@ function App() {
       payload: BrandId(),
     });
   }
-  console.log("selectedImageselectedImageselectedImageselectedImage", image);
   useEffect(() => {
     if (getBrand?.brandingLogoDetail?.brandLogoContent) {
       setImage2(
         `data:image/jpeg;base64,${getBrand?.brandingLogoDetail?.brandLogoContent}`
       );
-
       setHeight(getBrand?.brandingLogoDetail?.brandLogo?.height);
       setWidth(getBrand?.brandingLogoDetail?.brandLogo?.width);
     }
   }, [getBrand]);
-  console.log("image", image?.name, image2);
   return (
     <div className="container mx-auto mt-5 space-y-6">
-      <div className="flex flex-col lg:flex-row lg:space-x-6 rtl:space-x-reverse">
+      <div className="flex flex-col lg:flex-col  rtl:space-x-reverse">
         <CardMain
-          width="w-full h-max lg:w-1/2 lg:mt-0 mt-4"
-          heading={t("Upload")}>
-          <div>
+          width="w-full h-max lg:mt-0 mt-4 "
+          heading={t("Upload")}
+          headerDisable={true}>
+          <div className="pt-1 pb-1">
             <div
               onClick={handleClick}
               className="border  bg-secondry rounded-md border-dashed	 border-slate-200 items-center flex flex-col justify-center px-4 py-8">
-              <img src={UplaodIcon} />
-              <a className="font-semibold mt-3">
+              <img src={UplaodIcon} className="w-14" />
+              <a className="font-semibold mt-2 text-sm">
                 Drag & drop files or{" "}
                 <span className="underline text-primary font-bold cursor-pointer hover:opacity-80 duration-300">
                   Browse
                 </span>
               </a>
-              <a className="text-xs text-gray-600 mt-3">
+              <a className="text-xs text-gray-600 mt-1">
                 Supported formates: PNG , SVG
               </a>
             </div>
-            <div className="mt-2">
+            {/* <div className="mt-2">
               <a className="text-xs opacity-70 font-semibold">
                 Uploading - 1/1 files
               </a>
@@ -153,13 +151,14 @@ function App() {
 
             <div className="text-xs  px-4  border border-gray-100 h-full py-2 text-gray-700 w-full mt-2 rounded-full">
               {image?.name ? image?.name : "your-file-here.png"}
-            </div>
+            </div> */}
           </div>
         </CardMain>
         <CardMain
-          width=" h-max w-full lg:w-1/2 lg:mt-0 mt-4 "
-          heading={t("Preview")}>
-          <div className="border  bg-secondry rounded-md border-dashed	 border-slate-200 flex flex-col px-4 py-4">
+          width=" h-max w-full  mt-4 "
+          heading={t("Preview")}
+          headerDisable={true}>
+          <div className="border  bg-secondry rounded-md border-dashed	 border-slate-200 flex flex-col px-4 py-4 mt-2">
             <div className="flex flex-row  justify-between space-x-2 flex flex-end">
               <div></div>
               <div className="flex flex-row  space-x-2 flex flex-end pb-4">
@@ -186,45 +185,47 @@ function App() {
               /> */}
             </div>
           </div>
-          <div className="flex flex-row space-x-6 mt-10">
-            <div className="flex flex-col text-xs   text-gray-700  mt-2">
+          <div className="flex flex-row space-x-6 mt-6">
+            <div className="md:w-28 w-5/12	 flex flex-col text-xs   text-gray-700  mt-2">
               <a>Height (px)</a>
               <input
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
-                className="rounded-md bg-secondry py-2 px-3 outline-none mt-2 w-28 text-sm"
+                className="rounded-md bg-secondry py-2 px-3 outline-none mt-2  text-sm"
               />
             </div>
-            <div className="flex flex-col text-xs   text-gray-700  mt-2">
+            <div className="md:w-28 w-5/12	 flex flex-col text-xs   text-gray-700  mt-2">
               <a>Width (px)</a>
               <input
                 onChange={(e) => setWidth(e.target.value)}
                 value={width}
-                className="rounded-md bg-secondry py-2 px-3 outline-none mt-2 w-28 text-sm"
+                className="rounded-md bg-secondry py-2 px-3 outline-none mt-2  text-sm"
               />
             </div>
           </div>
-          <div className="flex flex-row space-x-6 mt-10 mb-4">
-            <div className="flex flex-col text-xs   text-gray-700  mt-2 w-1/3 items-center text-center">
-              <a
-                onClick={resetImageSizes}
-                className="border-red-400 border px-4 p-1 rounded-lg  py-2 w-full cursor-pointer ">
-                Reset
-              </a>
-            </div>
-            <div className="flex flex-col text-xs   text-gray-700  mt-2 w-1/3 items-center text-center">
-              <a
-                onClick={CreateLogo}
-                className="border-blue-400 border px-4 p-1 rounded-lg  py-2 w-full cursor-pointer ">
-                Save
-              </a>
-            </div>
-            <div className="flex flex-col text-xs   text-gray-700  mt-2 w-1/3 items-center text-center">
-              <a
-                onClick={() => setContent()}
-                className="duration-300 border-primary text-white bg-primary border  w-full p-2 rounded-lg  cursor-pointer hover:opacity-80">
-                Update
-              </a>
+          <div className="flex flex-col md:flex-row justify-between">
+            <div></div>
+            <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-6 mt-10 mb-4">
+              <div className="flex space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-red-400 cursor-pointer border text-gray-700 text-center">
+                <RxReset className="text-gray-500 cursor-pointer" />
+                <a onClick={resetImageSizes} className="">
+                  Reset
+                </a>
+              </div>
+
+              <div className="flex space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-blue-400 cursor-pointer border text-gray-700 text-center">
+                <RxUpdate className="text-gray-500 cursor-pointer" />
+                <a onClick={() => setContent()} className="">
+                  Update Pixels
+                </a>
+              </div>
+
+              <div className="text-white flex bg-primary space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-blue-400 cursor-pointer border text-center">
+                <FaRegSave className="text-white cursor-pointer" />
+                <a onClick={CreateLogo} className="">
+                  Save
+                </a>
+              </div>
             </div>
           </div>
         </CardMain>

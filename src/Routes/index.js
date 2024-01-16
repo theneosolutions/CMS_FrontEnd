@@ -3,6 +3,9 @@ import MainLayout from "../Layouts/MainLayout";
 import { routes } from "./routes";
 import Profile from "Pages/Profile";
 import TestPage from "Pages/TestPage";
+import TestPage2 from "Pages/TestPage/test2";
+import TestPage3 from "Pages/TestPage/test3";
+
 import Applications from "Pages/Applications";
 import UserDetail from "Pages/UserDetail";
 import MyAccount from "Pages/MyAccount";
@@ -21,6 +24,9 @@ function App() {
           {routes}
           <Route path="/profile" element={<Profile />} />
           <Route path="/test" element={<TestPage />} />
+          <Route path="/test2" element={<TestPage2 />} />
+          <Route path="/test3" element={<TestPage3 />} />
+
           <Route path="/applications" element={<Applications />} />
           <Route path="/user-detail" element={<UserDetail />} />
           <Route path="/my-account" element={<MyAccount />} />

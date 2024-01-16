@@ -62,7 +62,6 @@ function TestPage() {
           onClick={(e) => handleInputChange(e)}
         />
       </div>
-
       <div
         className={`${
           state ? "w-full md:w-4/5" : "w-full"

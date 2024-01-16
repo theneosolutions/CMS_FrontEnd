@@ -31,13 +31,14 @@ function App() {
   };
 
   function CreateSplash() {
-    const formData = new FormData();
-    formData.append("file", image1);
-    formData.append("brandId", BrandId());
-    dispatch({
-      type: "CREATE_SPLASH",
-      payload: formData,
-    });
+    console.log("helooooo");
+    // const formData = new FormData();
+    // formData.append("file", image1);
+    // formData.append("brandId", BrandId());
+    // dispatch({
+    //   type: "CREATE_SPLASH",
+    //   payload: formData,
+    // });
   }
 
   return (
@@ -49,13 +50,14 @@ function App() {
           setImage={(e) => setImage1(e)}
           setLottieOptions={(e) => setLottieOptions1(e)}
           lottieOptions={lottieOptions1}
+          CreateSplash={CreateSplash}
         />
       </div>
-      <Button
+      {/* <Button
         onButtonClick={CreateSplash}
         buttonValue="UPLOAD FILES"
         buttonStyle="w-full my-2 mt-5 text-xs font-semibold "
-      />
+      /> */}
       <Snackbar
         open={open}
         autoHideDuration={5000}

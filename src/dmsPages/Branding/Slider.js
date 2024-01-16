@@ -45,10 +45,10 @@ function CreateBrand() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row  md:space-x-4 bg-gray-200 mt-5 md:mt-0">
+    <div className="flex flex-col   bg-gray-200 mt-5 md:mt-0">
       <WaveAnimation show={loading} />
 
-      <CardMain width="w-full md:w-1/2" heading={"Create Slider"}>
+      <CardMain width="w-full " headerDisable={true}>
         <form onSubmit={handleSubmit}>
           <div className="flex md:flex-row flex-col md:space-x-20 mt-5 rtl:space-x-reverse">
             <div className=" w-full space-y-5">
@@ -63,22 +63,24 @@ function CreateBrand() {
           <div className="flex flex-row justify-end mt-10">
             <Button
               type="submit"
-              buttonValue={t("Submit")}
-              buttonStyle="px-20 py-1 w-full md:w-max"
+              buttonValue={t("Create")}
+              buttonStyle="px-20  w-full md:w-max"
             />
           </div>
         </form>
       </CardMain>
       {allSliders.length > 0 && (
-        <CardMain width="w-full md:w-1/2 md:mt-0 mt-4" heading={"All Sliders"}>
-          <div className="flex flex-col   space-y-4 ">
+        <CardMain width="w-full mt-4" heading={"All Sliders"}>
+          <div className="flex flex-wrap    ">
             {allSliders?.map((v, k) => {
               return (
-                <div
-                  className="flex flex-col space-y-3 "
-                  onClick={() => handleBrand(v.mainTittle)}>
-                  <div className="px-3 py-6 items-center justify-center flex flex-col border-primary border rounded-lg hover:bg-secondry duration-200  ">
-                    <a>Slider Name : {v.mainTittle}</a>
+                <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-1 cursor-pointer">
+                  <div
+                    className="flex flex-col space-y-3 "
+                    onClick={() => handleBrand(v?.mainTittle)}>
+                    <div className="px-3 py-6 items-center justify-center flex flex-col border-primary border rounded-lg hover:bg-secondry duration-200  ">
+                      <a>Slider Name : {v?.mainTittle}</a>
+                    </div>
                   </div>
                 </div>
               );
