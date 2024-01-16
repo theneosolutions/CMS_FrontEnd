@@ -33,7 +33,7 @@ function App() {
   const name = queryParams.get("name");
   const getBrand = useSelector((state) => state.getSingleBrand);
   const allSliders = useSelector((state) => state.getAllSliders);
-
+  const [active, setActive] = useState({});
   // console.log("single slider slider state", allSliders);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function App() {
     }
   }, []);
 
-  const data = allSliders.filter((slider) => slider.mainTittle === name);
+  const data = allSliders?.filter((slider) => slider.mainTittle === name);
   // console.log("data", data);
   const handleClose = () => {
     dispatch(action.Message({ open: false }));
@@ -68,6 +68,10 @@ function App() {
       type: "GET_ALL_SLIDERS",
     });
   }
+  useEffect(() => {
+    console.log("data[0]", data[0]?.brandSliderScreenList[0]);
+    setActive(data[0]?.brandSliderScreenList[0]);
+  }, []);
   return (
     <div className="flex flex-col mx-auto mt-5 space-y-6 ">
       <WaveAnimation show={loading} />
@@ -88,12 +92,35 @@ function App() {
       </div>
 
       {data[0]?.brandSliderScreenList.length > 0 && (
+        <div className="flex flex-row w-full py-3 px-4 bg-white rounded-md mx-2 space-x-6">
+          {data[0]?.brandSliderScreenList.map((v, k) => {
+            return (
+              <div
+                onClick={() => setActive(v)}
+                className={`cursor-pointer opacity-80 ${
+                  active.title === v.title
+                    ? "border-b-2 border-blue-400 text-blue-400"
+                    : null
+                }  px-3 py-1`}>
+                <a>{v.title}</a>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      {data[0]?.brandSliderScreenList.length > 0 && (
+        <div className="flex flex-wrap  ">
+          {active && <ShowData data={active} />}
+        </div>
+      )}
+      {/* 
+      {data[0]?.brandSliderScreenList.length > 0 && (
         <div className="flex flex-wrap  ">
           {data[0]?.brandSliderScreenList.map((v, k) => {
             return <ShowData data={v} />;
           })}
         </div>
-      )}
+      )} */}
 
       <Snackbar
         open={open}
@@ -115,8 +142,12 @@ export default App;
 
 function ShowData({ data }) {
   const { t } = useTranslation();
-  // console.log("my data slide", data);
-
+  let animationData = null;
+  try {
+    animationData = data?.file ? JSON.parse(data?.file) : null;
+  } catch (error) {
+    console.error("Error parsing JSON:", error);
+  }
   return (
     <div className="md:mt-0 mt-4 w-full md:w-1/2 lg:w-1/3  p-2">
       <CardMain
@@ -131,10 +162,10 @@ function ShowData({ data }) {
             </div>
           </div>
           <div className=" flex flex-col items-center justify-center ">
-            {data && data.title && (
+            {data && data?.title && (
               <div className="flex flex-row text-xs text-gray-700 mt-2 w-full mt-3 pb-2">
                 <a className="w-20">Title : </a>
-                <a className="font-semibold">{data.title}</a>
+                <a className="font-semibold">{data?.title}</a>
               </div>
             )}
             <div className="flex flex-row text-xs   text-gray-700  mt-2 w-full  mt-3 pb-2">
@@ -145,10 +176,9 @@ function ShowData({ data }) {
               <a className="w-20  ">Description : </a>
               <a className="font-semibold">{data?.desc}</a>
             </div>
-            <div className="">
-              {console.log("fileeeeeeeeeeeeeeeeeeee", JSON.parse(data?.file))}
-              {data?.file ? (
-                <Lottie animationData={JSON.parse(data?.file)} loop={true} />
+            <div className="w-32">
+              {animationData ? (
+                <Lottie animationData={animationData} loop={true} />
               ) : (
                 <div>Error loading animation</div>
               )}

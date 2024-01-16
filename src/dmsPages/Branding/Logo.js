@@ -126,10 +126,7 @@ function App() {
   return (
     <div className="container mx-auto mt-5 space-y-6">
       <div className="flex flex-col lg:flex-col  rtl:space-x-reverse">
-        <CardMain
-          width="w-full h-max lg:mt-0 mt-4 "
-          heading={t("Upload")}
-          headerDisable={true}>
+        <CardMain width="w-full h-max lg:mt-0 mt-4 " headerDisable={true}>
           <div className="pt-1 pb-1">
             <div
               onClick={handleClick}
@@ -147,10 +144,7 @@ function App() {
             </div>
           </div>
         </CardMain>
-        <CardMain
-          width=" h-max w-full  mt-4 "
-          heading={t("Preview")}
-          headerDisable={true}>
+        <CardMain width=" h-max w-full  mt-4 " headerDisable={true}>
           <div className="border  bg-secondry rounded-md border-dashed	 border-slate-200 flex flex-col px-4 py-4 mt-2">
             <div className="flex flex-row  justify-between space-x-2 flex flex-end">
               <div></div>
@@ -173,9 +167,9 @@ function App() {
                 />
               )}
               {/* <img
-                src={`data:image/jpeg;base64,${getBrand.logoContent}`}
-                style={{ height: mainheight, width: mainwidth }}
-              /> */}
+                  src={`data:image/jpeg;base64,${getBrand.logoContent}`}
+                  style={{ height: mainheight, width: mainwidth }}
+                /> */}
             </div>
           </div>
           <div className="flex flex-row space-x-6 mt-6">

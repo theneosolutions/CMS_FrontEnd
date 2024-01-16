@@ -2,11 +2,12 @@ import React, { useRef } from "react";
 import CardMain from "../../Components/Cards/main";
 import { useTranslation } from "react-i18next";
 import UplaodIcon from "../../Assets/dms/Images/uplaod.svg";
-import { Button } from "../../Components";
 import { PiImageThin } from "react-icons/pi";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Lottie from "lottie-react";
+import { FaRegSave } from "react-icons/fa";
+import { RxReset } from "react-icons/rx";
 
 function App({
   lottieOptions,
@@ -67,69 +68,64 @@ function App({
 
   return (
     <div className="mt-5  w-full">
-      <div className="flex flex-col md:flex-col w-full md:space-x-5">
-        <CardMain
-          width="md:w-1/2 w-full h-max  md:mt-0 mt-4"
-          heading={t("Upload")}>
-          <div>
-            <div
-              onClick={handleClick}
-              className="border  bg-secondry rounded-md border-dashed	 border-slate-200 items-center flex flex-col justify-center px-4 py-8">
-              <img src={UplaodIcon} />
-              <a className="font-semibold mt-3">
-                Drag & drop files or{" "}
-                <span className="underline text-primary font-bold cursor-pointer hover:opacity-80 duration-300">
-                  Browse
-                </span>
-              </a>
-              <a className="text-xs text-gray-600 mt-3">
-                Supported formates: JSON (Lottie File)
-              </a>
+      <div className="flex flex-col md:flex-col w-full ">
+        <CardMain width=" w-full h-max  md:mt-0 mt-4" heading={t("Upload")}>
+          <div className="flex flex-row space-x-4">
+            <div className="w-1/2">
+              <div
+                onClick={handleClick}
+                className="border  bg-secondry rounded-md border-dashed	 border-slate-200 items-center flex flex-col justify-center px-4 py-8">
+                <img src={UplaodIcon} />
+                <a className="font-semibold mt-3">
+                  Drag & drop files or{" "}
+                  <span className="underline text-primary font-bold cursor-pointer hover:opacity-80 duration-300">
+                    Browse
+                  </span>
+                </a>
+                <a className="text-xs text-gray-600 mt-3">
+                  Supported formates: JSON (Lottie File)
+                </a>
+              </div>
             </div>
 
-            <div className="text-xs  px-4  border border-gray-100 h-full py-2 text-gray-700 w-full mt-2 rounded-full">
-              your-file-here.PDF
-            </div>
-            <div className="flex flex-row space-x-6 mt-3">
-              <div className="flex flex-col text-xs w-1/2    text-gray-700  mt-2  ">
-                <a>Title</a>
+            <div className=" w-1/2">
+              <div className="flex flex-row space-x-6 ">
+                <div className="flex flex-col text-xs w-1/2    text-gray-700   ">
+                  <a>Title</a>
+                  <input
+                    onChange={(e) => setTitle(e.target.value)}
+                    value={title}
+                    placeholder="Slide Title"
+                    className="rounded-md w-full bg-secondry py-2 px-3 outline-none mt-2  text-sm"
+                  />
+                </div>
+                <div className="flex flex-col text-xs w-1/2    text-gray-700   ">
+                  <a>Position</a>
+                  <input
+                    type="number"
+                    onChange={(e) => setPosition(e.target.value)}
+                    value={position}
+                    placeholder="Slide Position"
+                    className="rounded-md w-full bg-secondry py-2 px-3 outline-none mt-2  text-sm"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col text-xs   text-gray-700  mt-2 w-full  mt-3 pb-2">
+                <a>Description</a>
                 <input
-                  onChange={(e) => setTitle(e.target.value)}
-                  value={title}
-                  placeholder="Slide Title"
-                  className="rounded-md w-full bg-secondry py-2 px-3 outline-none mt-2  text-sm"
+                  onChange={(e) => setDescription(e.target.value)}
+                  value={description}
+                  placeholder="Discription"
+                  className="rounded-md w-full bg-secondry py-2 px-3 outline-none mt-2 w-28 text-sm"
                 />
               </div>
-              <div className="flex flex-col text-xs w-1/2    text-gray-700  mt-2  ">
-                <a>Position</a>
-                <input
-                  onChange={(e) => setPosition(e.target.value)}
-                  value={position}
-                  placeholder="Slide Position"
-                  className="rounded-md w-full bg-secondry py-2 px-3 outline-none mt-2  text-sm"
-                />
+              <div className="text-xs   px-4  border border-gray-500  py-2 text-gray-700 w-full mt-2 rounded-full">
+                your-file-here.PDF
               </div>
-            </div>
-            <div className="flex flex-col text-xs   text-gray-700  mt-2 w-full  mt-3 pb-2">
-              <a>Description</a>
-              <input
-                onChange={(e) => setDescription(e.target.value)}
-                value={description}
-                placeholder="Discription"
-                className="rounded-md w-full bg-secondry py-2 px-3 outline-none mt-2 w-28 text-sm"
-              />
             </div>
           </div>
-          <Button
-            buttonDisable={
-              title && position && description && lottieOptions ? false : true
-            }
-            onButtonClick={onsubmit}
-            buttonValue="UPLOAD FILES"
-            buttonStyle="w-full my-2 mt-5 text-xs font-semibold "
-          />
         </CardMain>
-        <div className="md:mt-0 mt-4 md:w-1/2 w-full ">
+        <div className=" mt-4  w-full ">
           <CardMain
             width=" h-max w-full md:w-full md:mt-0 mt-4 "
             heading={t("Preview")}>
@@ -145,19 +141,32 @@ function App({
                 {!image && !lottieOptions && (
                   <PiImageThin className="text-primary h-44  w-full" />
                 )}
-                <div className="">
+                <div className="w-32">
                   <Lottie animationData={lottieOptions} loop={true} />
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-row space-x-6 mt-10 mb-4">
-              <div className="flex flex-col text-xs   text-gray-700  mt-2 w-1/3 items-center text-center">
-                <a
+            <div className="flex flex-col md:flex-row justify-between">
+              <div></div>
+              <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-6 mt-10 mb-4">
+                <div
                   onClick={resetImageSizes}
-                  className="border-red-400 border px-4 p-1 rounded-lg  py-2 w-full cursor-pointer ">
-                  Reset
-                </a>
+                  className="flex space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-red-400 cursor-pointer border text-gray-700 text-center">
+                  <RxReset className="text-gray-500 cursor-pointer" />
+                  <a className="">Reset</a>
+                </div>
+                <button
+                  disabled={
+                    title && position && description && lottieOptions
+                      ? false
+                      : true
+                  }
+                  onClick={() => onsubmit()}
+                  className="hover:opacity-80 text-white flex bg-primary space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full duration-200 cursor-pointer border text-center">
+                  <FaRegSave className="text-white cursor-pointer" />
+                  <a className="">UPLOAD FILES</a>
+                </button>
               </div>
             </div>
           </CardMain>

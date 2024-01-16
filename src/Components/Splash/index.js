@@ -6,9 +6,7 @@ import { PiImageThin } from "react-icons/pi";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Lottie from "lottie-react";
-import { Button } from "../../Components";
 import { RxReset } from "react-icons/rx";
-import { RxUpdate } from "react-icons/rx";
 import { FaRegSave } from "react-icons/fa";
 function Splash({
   lottieOptions,
