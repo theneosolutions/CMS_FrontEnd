@@ -73,7 +73,7 @@ function App() {
     setActive(data[0]?.brandSliderScreenList[0]);
   }, []);
   return (
-    <div className="flex flex-col mx-auto mt-5 space-y-6 ">
+    <div className="flex flex-col mx-auto mt-5 ">
       <WaveAnimation show={loading} />
       <div className="flex lg:flex-row flex-col lg:space-x-4 ">
         <SliderComponent
@@ -92,12 +92,13 @@ function App() {
       </div>
 
       {data[0]?.brandSliderScreenList.length > 0 && (
-        <div className="flex flex-row w-full py-3 px-4 bg-white rounded-md mx-2 space-x-6">
+        <div className="border-b mt-4 flex flex-row w-full pt-3 px-4 bg-white rounded-t-md  space-x-6">
           {data[0]?.brandSliderScreenList.map((v, k) => {
             return (
               <div
                 onClick={() => setActive(v)}
-                className={`cursor-pointer opacity-80 ${
+                style={{ marginBottom: -1 }}
+                className={`cursor-pointer opacity-80  ${
                   active.title === v.title
                     ? "border-b-2 border-blue-400 text-blue-400"
                     : null
@@ -113,14 +114,6 @@ function App() {
           {active && <ShowData data={active} />}
         </div>
       )}
-      {/* 
-      {data[0]?.brandSliderScreenList.length > 0 && (
-        <div className="flex flex-wrap  ">
-          {data[0]?.brandSliderScreenList.map((v, k) => {
-            return <ShowData data={v} />;
-          })}
-        </div>
-      )} */}
 
       <Snackbar
         open={open}
@@ -149,43 +142,39 @@ function ShowData({ data }) {
     console.error("Error parsing JSON:", error);
   }
   return (
-    <div className="md:mt-0 mt-4 w-full md:w-1/2 lg:w-1/3  p-2">
-      <CardMain
-        width=" h-max w-full md:w-full md:mt-0 mt-4 "
-        heading={t("Preview")}>
-        <div className="border  bg-secondry rounded-md border-dashed	 border-slate-200 flex flex-col px-4 py-4">
-          <div className="flex flex-row  justify-between space-x-2 flex flex-end">
-            <div></div>
-            <div className="flex flex-row  space-x-2 flex flex-end pb-4">
-              <FaRegEdit className="text-blue-500 cursor-pointer" />
-              <RiDeleteBin6Line className="text-red-400 cursor-pointer" />
-            </div>
-          </div>
-          <div className=" flex flex-col items-center justify-center ">
-            {data && data?.title && (
-              <div className="flex flex-row text-xs text-gray-700 mt-2 w-full mt-3 pb-2">
-                <a className="w-20">Title : </a>
-                <a className="font-semibold">{data?.title}</a>
-              </div>
-            )}
-            <div className="flex flex-row text-xs   text-gray-700  mt-2 w-full  mt-3 pb-2">
-              <a className="w-20  ">Position : </a>
-              <a className="font-semibold">{data?.position}</a>
-            </div>
-            <div className="flex flex-row text-xs   text-gray-700  mt-2 w-full  mt-3 pb-2">
-              <a className="w-20  ">Description : </a>
-              <a className="font-semibold">{data?.desc}</a>
-            </div>
-            <div className="w-32">
-              {animationData ? (
-                <Lottie animationData={animationData} loop={true} />
-              ) : (
-                <div>Error loading animation</div>
-              )}
-            </div>
+    <div className="bg-white px-5 w-full py-6">
+      <div className="bg-white border  bg-secondry border-dashed	 border-slate-200 flex flex-col px-4 py-4">
+        <div className="flex flex-row  justify-between space-x-2 flex flex-end">
+          <div></div>
+          <div className="flex flex-row  space-x-2 flex flex-end pb-4">
+            <FaRegEdit className="text-blue-500 cursor-pointer" />
+            <RiDeleteBin6Line className="text-red-400 cursor-pointer" />
           </div>
         </div>
-      </CardMain>
+        <div className=" flex flex-col items-center justify-center ">
+          {data && data?.title && (
+            <div className="flex flex-row text-xs text-gray-700  w-full  pb-2">
+              <a className="w-20">Title : </a>
+              <a className="font-semibold">{data?.title}</a>
+            </div>
+          )}
+          <div className="flex flex-row text-xs   text-gray-700  mt-2 w-full  mt-3 pb-2">
+            <a className="w-20  ">Position : </a>
+            <a className="font-semibold">{data?.position}</a>
+          </div>
+          <div className="flex flex-row text-xs   text-gray-700  mt-2 w-full  mt-3 pb-2">
+            <a className="w-20  ">Description : </a>
+            <a className="font-semibold">{data?.desc}</a>
+          </div>
+          <div className="w-32 h-52">
+            {animationData ? (
+              <Lottie animationData={animationData} loop={true} />
+            ) : (
+              <div>Error loading animation</div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
