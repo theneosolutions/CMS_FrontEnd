@@ -12,7 +12,7 @@ function Button({
       type={type}
       disabled={buttonDisable}
       onClick={onButtonClick}
-      className={` rounded-tr-lg  rounded-bl-lg	 text-white  px-5 py-3  ${buttonStyle} hover:bg-opacity-90  duration-300 ${
+      className={` rounded-tr-lg  rounded-bl-lg	 text-white  px-5 py-2  ${buttonStyle} hover:bg-opacity-90  duration-300 ${
         buttonColor ? buttonColor : `bg-primary `
       }`}>
       {buttonValue}

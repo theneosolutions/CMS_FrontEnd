@@ -37,32 +37,20 @@ function TestPage() {
   };
 
   const handleInputChange = (value) => {
-    // const filter = getAppFlowData?.appFlow?.screenFlow.find(
-    //   (item) => item.name === activeSideScreen
-    // );
-    console.log("helo22222222", value);
-    // const matchingDiv = getAppFlowData?.appFlow?.screenFlow.find(
-    //   (div) => div.name.toLowerCase() === value.toLowerCase()
-    // );
-    // if (matchingDiv) {
-    //   divRefs.current[matchingDiv.name].scrollIntoView({
-    //     behavior: "smooth",
-    //     block: "center",
-    //   });
-    setActiveSideScreen(value);
-    // }
+    const matchingDiv = getAppFlowData?.appFlow?.screenFlow.find(
+      (div) => div.name.toLowerCase() === value.toLowerCase()
+    );
+    if (matchingDiv) {
+      divRefs.current[matchingDiv.name].scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+      setActiveSideScreen(matchingDiv.name);
+    }
   };
 
-  // const filter = getAppFlowData?.appFlow?.screenFlow.find(
-  //   (item) => item.name === activeSideScreen
-  // );
-  console.log("filter", activeSideScreen);
   return (
-    <div
-      style={{ height: "80vh" }}
-      className="flex bg-black md:flex-row flex-col md:space-y-0 space-y-3 mt-5 md:mt-0 w-full flex w-full ">
-      <WaveAnimation show={loading} />
-
+    <div className="flex md:flex-row flex-col md:space-x-4 md:space-y-0 space-y-3 mt-5 md:mt-0 w-full flex w-full ">
       <div
         className={`${
           state ? "w-full md:w-1/5" : "w-full md:w-min"
@@ -76,99 +64,86 @@ function TestPage() {
       </div>
       <div
         className={`${
-          state ? "w-full md:w-3/5	" : "w-full"
-        }	 flex   flex flex-row space-x-4 	 justify-center`}>
+          state ? "w-full md:w-4/5" : "w-full"
+        }	rounded-lg flex p-4  bg-gray-100 flex flex-row space-x-4 	`}>
+        <WaveAnimation show={loading} />
         <div className="flex flex-wrap">
-          <div className="w-full md:w-56 px-2 cursor-pointer">
+          {getAppFlowData?.appFlow?.screenFlow?.map((v, k) => (
             <div
-              className={`relative mt-4 w-full  bg-white border-4  rounded-3xl overflow-hidden`}>
-              <div className="w-full h-6 bg-gray-800 justify-center flex text-white text-xs items-center pb-1">
-                {activeSideScreen?.name}
+              onDoubleClick={() => (handleSidebarToggle(), setActive(v))}
+              // onClick={() => (handleSidebarToggle(), setActive(v))}
+              className="w-full md:w-48 px-2 cursor-pointer"
+              ref={(ref) => (divRefs.current[v.name] = ref)}
+              tabIndex={0}>
+              <div
+                className={`relative mt-4 w-full  bg-white border-4 ${
+                  activeSideScreen === v.name
+                    ? "border-primary shadow-2xl"
+                    : "border-black"
+                } rounded-3xl overflow-hidden`}>
+                <div className="w-full h-6 bg-gray-800 justify-center flex text-white text-xs items-center pb-1">
+                  {k + 1} - {v?.name}
+                </div>
+                <div className="w-full h-full">
+                  <img
+                    src={v?.components?.lottieFile}
+                    className="w-full h-full object-cover" // Remove pb-6 to eliminate bottom padding
+                    alt="Your Image Alt Text"
+                  />
+                </div>
               </div>
-              <div className="w-full h-full">
-                <img
-                  src={activeSideScreen?.components?.lottieFile}
-                  className="w-full h-full object-cover" // Remove pb-6 to eliminate bottom padding
-                  alt="Your Image Alt Text"
+            </div>
+          ))}
+        </div>
+
+        <div>
+          <Sidebar isOpen={isSidebarOpen} onClose={handleSidebarToggle}>
+            <div className="w-full  ">
+              <a className="w-full text-center  justify-center flex text-gray-800 text-semibold text-primary underline text-xl">
+                {active?.name}
+              </a>
+              <div className="flex flex-col space-y-2">
+                {active?.button?.map((v, k) => {
+                  return (
+                    // <Select
+                    //   heading={v.name}
+                    //   type="select"
+                    //   // value={role}
+                    //   options={role}
+                    //   onChange={(e) => setRole(e)}
+                    // />
+
+                    <InputField
+                      heading={v.name}
+                      onChange={(e) => console.log(e)}
+                    />
+                  );
+                })}
+              </div>
+              <div className="flex flex-row justify-between">
+                <div></div>
+                <Button
+                  onButtonClick={() => console.log("helo")}
+                  buttonValue={"Create"}
+                  buttonStyle="px-20 py-2 w-full md:w-max mt-4"
                 />
               </div>
             </div>
-          </div>
+          </Sidebar>
         </div>
-      </div>
-      <div className="bg-gray-800 md:w-1/5">
-        {" "}
-        <div className="m-4">
-          <button className="top-4 right-4  text-gray-400   rounded w-max "></button>
-          <div className="w-full  ">
-            <a className="w-full text-center  justify-center flex text-gray-800 text-semibold text-primary underline text-xl">
-              {active?.name}
-            </a>
-            <div className="flex flex-col space-y-2">
-              {active?.button?.map((v, k) => {
-                return (
-                  <InputField
-                    heading={v.name}
-                    onChange={(e) => console.log(e)}
-                  />
-                );
-              })}
-            </div>
-            <div className="flex flex-row justify-between">
-              <div></div>
-              <Button
-                onButtonClick={() => console.log("helo")}
-                buttonValue={"Create"}
-                buttonStyle="px-20 w-full md:w-max mt-4"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <div>
-          <div
-            className={`w-72 flex flex-col fixed  h-full w-0 bg-white overflow-x-hidden transition-all duration-500 `}>
-            <div className="m-4">
-              <button className="top-4 right-4  text-gray-400   rounded w-max "></button>
-              <div className="w-full  ">
-                <a className="w-full text-center  justify-center flex text-gray-800 text-semibold text-primary underline text-xl">
-                  {active?.name}
-                </a>
-                <div className="flex flex-col space-y-2">
-                  {active?.button?.map((v, k) => {
-                    return (
-                      <InputField
-                        heading={v.name}
-                        onChange={(e) => console.log(e)}
-                      />
-                    );
-                  })}
-                </div>
-                <div className="flex flex-row justify-between">
-                  <div></div>
-                  <Button
-                    onButtonClick={() => console.log("helo")}
-                    buttonValue={"Create"}
-                    buttonStyle="px-20 py-2 w-full md:w-max mt-4"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-      <Snackbar
-        open={open}
-        autoHideDuration={5000}
-        onClose={handleClose}
-        className="mt-4">
-        <Alert
+        <Snackbar
+          open={open}
+          autoHideDuration={5000}
           onClose={handleClose}
-          severity={!error ? "success" : "error"}
-          sx={{ width: "100%" }}>
-          {message}
-        </Alert>
-      </Snackbar>
+          className="mt-4">
+          <Alert
+            onClose={handleClose}
+            severity={!error ? "success" : "error"}
+            sx={{ width: "100%" }}>
+            {message}
+          </Alert>
+        </Snackbar>
+      </div>
     </div>
   );
 }

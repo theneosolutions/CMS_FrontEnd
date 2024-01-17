@@ -4,9 +4,12 @@ import * as action from "./reducer";
 import { store } from "./store";
 import { BrandId } from "funtions/BrandId";
 
-var baseUrlUser = "https://6066-82-167-87-137.ngrok-free.app";
-var baseUrlDecisions = "https://6066-82-167-87-137.ngrok-free.app/api/v1/dms";
-var baseUrlCMS = "https://6066-82-167-87-137.ngrok-free.app/api/v1/cms";
+var baseUrlUser =
+  "https://725c-2a00-5400-e053-7ddb-99ed-8b5-73a8-c511.ngrok-free.app";
+var baseUrlDecisions =
+  "https://725c-2a00-5400-e053-7ddb-99ed-8b5-73a8-c511.ngrok-free.app/api/v1/dms";
+var baseUrlCMS =
+  "https://725c-2a00-5400-e053-7ddb-99ed-8b5-73a8-c511.ngrok-free.app/api/v1/cms";
 
 function* GetAllQuestionsData() {
   try {
@@ -677,7 +680,7 @@ function* GetAppFlow() {
     yield put(action.Loading({ Loading: true }));
     const response = yield call(
       axios.get,
-      baseUrlCMS + `/apiFlow/getAppFlow?brandId=123`,
+      baseUrlCMS + `/screenFlow/getAppFlow?brandId=123`,
       {
         headers: {
           "ngrok-skip-browser-warning": "69420",
