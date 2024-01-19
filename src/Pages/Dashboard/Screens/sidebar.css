@@ -1,0 +1,11 @@
+/* Hide the scrollbar in Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+  
+  /* Hide the scrollbar for webkit-based browsers */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  

@@ -1,8 +1,6 @@
 import React from "react";
-
 import { FaTimes } from "react-icons/fa";
 import appRoutes from "../../Routes/appRoutes";
-
 import SidebarItem from "./SidebarItem";
 import SidebarItemCollapse from "./SidebarItemCollapse";
 import Logo from "../../Assets/Images/logo.svg";

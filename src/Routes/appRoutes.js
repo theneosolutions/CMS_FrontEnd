@@ -34,10 +34,12 @@ import Slider from "dmsPages/Branding/Slider";
 import InternalApiTree from "dmsPages/dashboard/internalApiTree";
 import ExternalApiTree from "dmsPages/dashboard/externalApiTree";
 import Screens from "Pages/Dashboard/Screens";
+import Builder from "Pages/Dashboard/builder";
+
 const appRoutes = [
   {
     index: true,
-    element: <UserList />,
+    element: <Logo />,
     state: "home",
   },
 
@@ -166,6 +168,14 @@ const appRoutes = [
         state: "dashboard.screens",
         sidebarProps: {
           displayText: "Screens",
+        },
+      },
+      {
+        path: "/dashboard/builder",
+        element: <Builder />,
+        state: "dashboard.builder",
+        sidebarProps: {
+          displayText: "Builder",
         },
       },
 
