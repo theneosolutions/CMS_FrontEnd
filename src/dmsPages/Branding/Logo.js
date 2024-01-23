@@ -133,22 +133,22 @@ function App() {
               className="border  bg-secondry rounded-md border-dashed	 border-slate-200 items-center flex flex-col justify-center px-4 py-8">
               <img src={UplaodIcon} className="w-14" />
               <a className="font-semibold mt-2 text-sm">
-                Drag & drop files or{" "}
+                {t("Drag & drop files or")}{" "}
                 <span className="underline text-primary font-bold cursor-pointer hover:opacity-80 duration-300">
-                  Browse
+                  {t("Browse")}
                 </span>
               </a>
               <a className="text-xs text-gray-600 mt-1">
-                Supported formates: PNG , SVG
+                {t("Supported formates")} : {t("PNG")},{t("SVG")}
               </a>
             </div>
           </div>
         </CardMain>
         <CardMain width=" h-max w-full  mt-4 " headerDisable={true}>
           <div className="border  bg-secondry rounded-md border-dashed	 border-slate-200 flex flex-col px-4 py-4 mt-2">
-            <div className="flex flex-row  justify-between space-x-2 flex flex-end">
+            <div className="flex flex-row  justify-between space-x-2 flex flex-end rtl:space-x-reverse">
               <div></div>
-              <div className="flex flex-row  space-x-2 flex flex-end pb-4">
+              <div className="flex flex-row rtl:space-x-reverse space-x-2 flex flex-end pb-4">
                 <FaRegEdit className="text-blue-500 cursor-pointer" />
                 <RiDeleteBin6Line className="text-red-400 cursor-pointer" />
               </div>
@@ -172,9 +172,9 @@ function App() {
                 /> */}
             </div>
           </div>
-          <div className="flex flex-row space-x-6 mt-6">
+          <div className="flex flex-row space-x-6 mt-6 rtl:space-x-reverse">
             <div className="md:w-28 w-5/12	 flex flex-col text-xs   text-gray-700  mt-2">
-              <a>Height (px)</a>
+              <a>{t("Height")} (px)</a>
               <input
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
@@ -182,7 +182,7 @@ function App() {
               />
             </div>
             <div className="md:w-28 w-5/12	 flex flex-col text-xs   text-gray-700  mt-2">
-              <a>Width (px)</a>
+              <a>{t("Width")} (px)</a>
               <input
                 onChange={(e) => setWidth(e.target.value)}
                 value={width}
@@ -192,26 +192,26 @@ function App() {
           </div>
           <div className="flex flex-col md:flex-row justify-between">
             <div></div>
-            <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-6 mt-10 mb-4">
+            <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-6 rtl:space-x-reverse mt-10 mb-4">
               <div
                 onClick={resetImageSizes}
-                className="flex space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-red-400 cursor-pointer border text-gray-700 text-center">
+                className="flex rtl:space-x-reverse space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-red-400 cursor-pointer border text-gray-700 text-center">
                 <RxReset className="text-gray-500 cursor-pointer" />
-                <a className="">Reset</a>
+                <a className="">{t("Reset")}</a>
               </div>
 
               <div
                 onClick={() => setContent()}
-                className="flex space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-blue-400 cursor-pointer border text-gray-700 text-center">
+                className="flex rtl:space-x-reverse space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-blue-400 cursor-pointer border text-gray-700 text-center">
                 <RxUpdate className="text-gray-500 cursor-pointer" />
-                <a className="">Update Pixels</a>
+                <a className="">{t("Update Pixels")}</a>
               </div>
 
               <div
                 onClick={() => CreateLogo()}
-                className="hover:opacity-80 text-white flex bg-primary space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full duration-200 cursor-pointer border text-center">
+                className="rtl:space-x-reverse hover:opacity-80 text-white flex bg-primary space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full duration-200 cursor-pointer border text-center">
                 <FaRegSave className="text-white cursor-pointer" />
-                <a className="">Save</a>
+                <a className="">{t("Save")}</a>
               </div>
             </div>
           </div>

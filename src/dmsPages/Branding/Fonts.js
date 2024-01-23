@@ -57,12 +57,12 @@ const Fonts = () => {
     });
   }
   return (
-    <div className="flex flex-col lg:flex-row flex-col-reverse lg:space-x-6 lg:mt-0 mt-6">
+    <div className="flex flex-col lg:flex-row flex-col-reverse lg:space-x-6 rtl:space-x-reverse lg:mt-0 mt-6">
       <WaveAnimation show={loading} />
 
       <CardMain
         width="lg:w-1/2 w-full mt-4 lg:mt-0"
-        heading={"Set Fonts File"}
+        heading={t("Set Fonts File")}
         Component={<Search setSearchInput={setSearchInput} />}>
         <div className="flex flex-row flex-wrap ">
           <div className="overflow-x-auto w-full">
@@ -90,11 +90,11 @@ const Fonts = () => {
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                       <td className="px-3 py-4">{v.family}</td>
                       <td className="px-3 py-4">
-                        <div className="flex flex-row space-x-4 ">
+                        <div className="flex flex-row space-x-4 rtl:space-x-reverse ">
                           <a
                             onClick={() => handleAddFonts(v)}
                             className="bg-primary rounded-md px-5 py-1 text-white hover:opacity-80 cursor-pointer">
-                            Save
+                            {t("Save")}
                           </a>
                         </div>
                       </td>
@@ -105,7 +105,7 @@ const Fonts = () => {
           </div>
         </div>
       </CardMain>
-      <CardMain width="w-full lg:w-1/2 h-min " heading={"Set Fonts File"}>
+      <CardMain width="w-full lg:w-1/2 h-min " heading={t("Set Fonts File")}>
         <div className="flex flex-row flex-wrap ">
           <div className="overflow-x-auto w-full">
             <table className="mt-4 w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -129,16 +129,16 @@ const Fonts = () => {
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <td className="px-3 py-4">{v.family}</td>
                     <td className="px-3 py-4">
-                      <div className="flex flex-row space-x-4 ">
+                      <div className="flex flex-row space-x-4 rtl:space-x-reverse">
                         <a className="bg-green-700 rounded-md px-3 py-1 text-white cursor-pointer">
-                          Published
+                          {t("Published")}
                         </a>
                       </div>
                     </td>
                     <td className="px-3 py-4">
-                      <div className="flex flex-row space-x-4 ">
+                      <div className="flex flex-row space-x-4 rtl:space-x-reverse">
                         <a className="bg-red-400 rounded-md px-3 py-1 text-white hover:opacity-80 cursor-pointer">
-                          Remove
+                          {t("Remove")}
                         </a>
                       </div>
                     </td>
@@ -164,11 +164,12 @@ const Fonts = () => {
 export default Fonts;
 
 function Search({ setSearchInput }) {
+  const { t } = useTranslation();
   return (
     <div>
       <input
         onChange={(e) => setSearchInput(e.target.value)}
-        placeholder={"Search Font"}
+        placeholder={t("Search Font")}
         className="border-gray-300 border rounded-md px-2 py-1   outline-none"
       />
     </div>

@@ -24,11 +24,11 @@ const Color = ({ name, color, published, onClick }) => {
               <a>{selectedColor}</a>
               {published ? (
                 <a className="bg-green-500 px-2 py-0.5 rounded-md text-white text-xs pt-1">
-                  Published
+                  {t("Published")}
                 </a>
               ) : (
                 <a className="bg-blue-400 px-2 py-0.5 rounded-md text-white text-xs pt-1">
-                  Draft
+                  {t("Draft")}
                 </a>
               )}
             </div>
@@ -42,7 +42,7 @@ const Color = ({ name, color, published, onClick }) => {
           </div>
           <Button
             onButtonClick={() => onClick(selectedColor, name)}
-            buttonValue="Confirm"
+            buttonValue={t("Confirm")}
             buttonStyle="w-full my-2 mt-5 text-xs font-semibold "
           />
         </CardMain>

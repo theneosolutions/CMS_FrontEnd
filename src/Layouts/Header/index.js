@@ -13,7 +13,8 @@ import { IoSearchOutline } from "react-icons/io5";
 
 function Header({ isOpen, toggleSidebar, className }) {
   const { t } = useTranslation();
-
+  const brand = JSON.parse(localStorage.getItem("brand"));
+  console.log("brandbrand", brand?.branding?.brandName);
   return (
     <div
       className={`px-3 md:px-10 py-4 flex flex-row justify-between  bg-secondry ${className}`}>
@@ -27,6 +28,10 @@ function Header({ isOpen, toggleSidebar, className }) {
           </div>
         )}
         <div className="flex flex-row items-center space-x-2 rtl:space-x-reverse md:flex hidden">
+          <a className="text-xl underline text-primary ">
+            {brand?.branding?.brandName}
+          </a>
+
           <IoSearchOutline className="text-gray-600 text-lg" />
           <input
             placeholder={t("Search")}
@@ -35,14 +40,14 @@ function Header({ isOpen, toggleSidebar, className }) {
         </div>
       </div>
       <div className="flex flex-row md:space-x-3 space-x-1 rtl:space-x-reverse items-center">
-        <div className="flex flex-row md:space-x-3 space-x-1 rtl:space-x-reverse md:px-5 px-1">
+        <div className="flex items-center flex-row md:space-x-3 space-x-1 rtl:space-x-reverse md:px-5 px-1">
           <Icons icon={Alarm} />
           <Icons icon={Message} notification={true} />
           <Icons2 icon={Globe} />
         </div>
         <div className="flex flex-row text-sm text-white items-center space-x-3 rtl:space-x-reverse">
           <div className="flex flex-col items-end">
-            <a className="text-xs text-gray-600">Admin</a>
+            <a className="text-xs text-gray-600">{t("Admin")}</a>
             <a className="font-semibold md:text-base text-xs text-gray-600">
               Zain Malik
             </a>
@@ -131,6 +136,8 @@ const Dropdown = () => {
     localStorage.removeItem("brand");
     navigate("/brands");
   };
+  // const isRTL = false;
+  let isRTL = localStorage.getItem("direction");
 
   // Event listener to handle clicks outside the dropdown
   const handleClickOutside = (event) => {
@@ -161,7 +168,9 @@ const Dropdown = () => {
       {/* Dropdown menu */}
       {isOpen && (
         <div
-          className="origin-top-right absolute right-0 mt-2 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className={`origin-top-right absolute mt-2 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none ${
+            isRTL != "rtl" ? "right-0" : "left-0"
+          }`}
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"

@@ -75,7 +75,7 @@ function App() {
   return (
     <div className="flex flex-col mx-auto mt-5 ">
       <WaveAnimation show={loading} />
-      <div className="flex lg:flex-row flex-col lg:space-x-4 ">
+      <div className="flex lg:flex-row flex-col lg:space-x-4  rtl:space-x-reverse">
         <SliderComponent
           image={image1}
           setImage={(e) => setImage1(e)}
@@ -144,9 +144,9 @@ function ShowData({ data }) {
   return (
     <div className="bg-white px-5 w-full py-6">
       <div className="bg-white border  bg-secondry border-dashed	 border-slate-200 flex flex-col px-4 py-4">
-        <div className="flex flex-row  justify-between space-x-2 flex flex-end">
+        <div className="flex flex-row  justify-between space-x-2 flex flex-end rtl:space-x-reverse">
           <div></div>
-          <div className="flex flex-row  space-x-2 flex flex-end pb-4">
+          <div className="flex flex-row  space-x-2 flex flex-end pb-4 rtl:space-x-reverse">
             <FaRegEdit className="text-blue-500 cursor-pointer" />
             <RiDeleteBin6Line className="text-red-400 cursor-pointer" />
           </div>
