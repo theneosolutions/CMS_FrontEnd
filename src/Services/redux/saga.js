@@ -4,12 +4,9 @@ import * as action from "./reducer";
 import { store } from "./store";
 import { BrandId } from "funtions/BrandId";
 
-var baseUrlUser =
-  "https://725c-2a00-5400-e053-7ddb-99ed-8b5-73a8-c511.ngrok-free.app";
-var baseUrlDecisions =
-  "https://725c-2a00-5400-e053-7ddb-99ed-8b5-73a8-c511.ngrok-free.app/api/v1/dms";
-var baseUrlCMS =
-  "https://725c-2a00-5400-e053-7ddb-99ed-8b5-73a8-c511.ngrok-free.app/api/v1/cms";
+var baseUrlUser = "https://6454-182-188-101-221.ngrok-free.app";
+var baseUrlDecisions = "https://6454-182-188-101-221.ngrok-free.app/api/v1/dms";
+var baseUrlCMS = "https://6454-182-188-101-221.ngrok-free.app/api/v1/cms";
 
 function* GetAllQuestionsData() {
   try {
