@@ -4,9 +4,9 @@ import * as action from "./reducer";
 import { store } from "./store";
 import { BrandId } from "funtions/BrandId";
 
-var baseUrlUser = "https://6454-182-188-101-221.ngrok-free.app";
-var baseUrlDecisions = "https://6454-182-188-101-221.ngrok-free.app/api/v1/dms";
-var baseUrlCMS = "https://6454-182-188-101-221.ngrok-free.app/api/v1/cms";
+var baseUrlUser = "https://seulah.ngrok.app";
+var baseUrlDecisions = "https://seulah.ngrok.app/api/v1/dms";
+var baseUrlCMS = "https://seulah.ngrok.app/api/v1/cms";
 
 function* GetAllQuestionsData() {
   try {
