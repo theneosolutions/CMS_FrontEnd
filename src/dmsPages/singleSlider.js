@@ -3,49 +3,38 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "Services/redux/reducer";
 import { Alert, Snackbar } from "@mui/material";
-import CardMain from "Components/Cards/main";
-
 import WaveAnimation from "Components/Loading"; // Adjust the path based on your file structure
 import { BrandId } from "funtions/BrandId";
 import SliderComponent from "dmsPages/Branding";
-import { useNavigate, useLocation } from "react-router-dom";
-import SliderJson from "./splash2.json";
+import { useLocation } from "react-router-dom";
 import Lottie from "lottie-react";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import axios from "axios";
+
 function App() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const [lottieOptions1, setLottieOptions1] = useState(null);
   const [image1, setImage1] = useState(null);
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [position, setPosition] = useState(null);
+  const [active, setActive] = useState({});
 
   const message = useSelector((state) => state.message);
   const open = useSelector((state) => state.open);
   const error = useSelector((state) => state.error);
   const loading = useSelector((state) => state.Loading);
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const name = queryParams.get("name");
   const getBrand = useSelector((state) => state.getSingleBrand);
   const allSliders = useSelector((state) => state.getAllSliders);
-  const [active, setActive] = useState({});
-  // console.log("single slider slider state", allSliders);
 
-  useEffect(() => {
-    if (getBrand?.brandingSplashScreen) {
-    }
-  }, []);
+  const queryParams = new URLSearchParams(location.search);
+  const name = queryParams.get("name");
 
   const data = allSliders?.filter((slider) => slider.mainTittle === name);
-  // console.log("data", data);
-  const handleClose = () => {
-    dispatch(action.Message({ open: false }));
-  };
 
   function CreateSplash() {
     const data = {
@@ -72,9 +61,10 @@ function App() {
     console.log("data[0]", data[0]?.brandSliderScreenList[0]);
     setActive(data[0]?.brandSliderScreenList[0]);
   }, []);
-  // console.log(
-  //   getLottieFile("https://seulahbucket.s3.amazonaws.com/Loan_Operation.json")
-  // );
+
+  const handleClose = () => {
+    dispatch(action.Message({ open: false }));
+  };
 
   return (
     <div className="flex flex-col mx-auto mt-5 ">
@@ -142,7 +132,6 @@ export default App;
 async function getLottieFile(item) {
   try {
     const response = await axios.get(item);
-    console.log("json", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching Lottie file:", error);
@@ -151,7 +140,6 @@ async function getLottieFile(item) {
 }
 function ShowData({ data }) {
   const [animationData, setAnimationData] = useState(null);
-  console.log("data?.file", data?.file);
   useEffect(() => {
     getLottieFile(data?.file)
       .then((result) => {
@@ -160,7 +148,7 @@ function ShowData({ data }) {
       .catch((error) => {
         console.error("Error fetching animation data:", error);
       });
-  }, [data?.file]); // Empty dependency array ensures this effect runs only once after initial render
+  }, [data?.file]);
 
   return (
     <div className="bg-white px-5 w-full py-6">
