@@ -86,7 +86,8 @@ function App() {
                 className="flex flex-col"
                 style={{
                   textAlign: item.username === username ? "right" : "left",
-                }}>
+                }}
+              >
                 <div className="">
                   <a className="border rounded-full border-gray-600 px-1">
                     {item.username.charAt(0)}
@@ -106,7 +107,8 @@ function App() {
           />
           <button
             onClick={() => handleSubmit()}
-            className="px-4 bg-green-400 text-sm">
+            className="px-4 bg-green-400 text-sm"
+          >
             Send
           </button>
         </div>
