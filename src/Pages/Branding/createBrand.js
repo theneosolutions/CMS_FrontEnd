@@ -48,7 +48,6 @@ function CreateBrand() {
     });
   }
   function handleBrand(v) {
-    console.log("log log ", v);
     dispatch({
       type: "GET_SINGLE_BRAND",
       payload: v,
@@ -87,7 +86,8 @@ function CreateBrand() {
               return (
                 <div
                   onClick={() => handleBrand(v.id)}
-                  className="px-3 py-6 items-center justify-center flex flex-row border-primary border rounded-lg hover:bg-secondry duration-200  ">
+                  className="px-3 py-6 items-center justify-center flex flex-row border-primary border rounded-lg hover:bg-secondry duration-200  "
+                >
                   Brand :{" "}
                   <span className="text-primary px-1 font-bold">
                     {v.brandName}
@@ -103,7 +103,8 @@ function CreateBrand() {
         <Alert
           onClose={handleClose}
           severity={!error ? "success" : "error"}
-          sx={{ width: "100%" }}>
+          sx={{ width: "100%" }}
+        >
           {message}
         </Alert>
       </Snackbar>
