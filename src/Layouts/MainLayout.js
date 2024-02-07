@@ -11,12 +11,10 @@ const MainLayout = () => {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
-  console.log("brand Id ", BrandId());
   useEffect(() => {
     if (!BrandId()) {
       navigate("/brands");
     } else {
-      console.log("brand Id ", BrandId());
     }
   });
   return (

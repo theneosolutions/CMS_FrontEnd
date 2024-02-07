@@ -13,7 +13,8 @@ const WaveAnimation = ({ show }) => {
             <div
               key={index}
               className="wave"
-              style={{ animationDelay: `${index * 0.1}s` }}></div>
+              style={{ animationDelay: `${index * 0.1}s` }}
+            ></div>
           ))}
         </div>
       ) : null}

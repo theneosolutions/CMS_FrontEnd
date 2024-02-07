@@ -5,7 +5,7 @@ import * as action from "Services/redux/reducer";
 import { Alert, Snackbar } from "@mui/material";
 import WaveAnimation from "Components/Loading"; // Adjust the path based on your file structure
 import { BrandId } from "funtions/BrandId";
-import SliderComponent from "dmsPages/Branding";
+import SliderComponent from "pages/Branding";
 import { useLocation } from "react-router-dom";
 import Lottie from "lottie-react";
 import { FaRegEdit } from "react-icons/fa";
@@ -58,7 +58,6 @@ function App() {
     });
   }
   useEffect(() => {
-    console.log("data[0]", data[0]?.brandSliderScreenList[0]);
     setActive(data[0]?.brandSliderScreenList[0]);
   }, []);
 

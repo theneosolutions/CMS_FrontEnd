@@ -98,8 +98,6 @@ function App() {
       width: mainwidth,
       image: image,
     };
-
-    console.log("this is data ", data);
     dispatch({
       type: "CREATE_LOGO",
       payload: data,
@@ -130,7 +128,8 @@ function App() {
           <div className="pt-1 pb-1">
             <div
               onClick={handleClick}
-              className="border  bg-secondry rounded-md border-dashed	 border-slate-200 items-center flex flex-col justify-center px-4 py-8">
+              className="border  bg-secondry rounded-md border-dashed	 border-slate-200 items-center flex flex-col justify-center px-4 py-8"
+            >
               <img src={UplaodIcon} className="w-14" />
               <a className="font-semibold mt-2 text-sm">
                 {t("Drag & drop files or")}{" "}
@@ -195,21 +194,24 @@ function App() {
             <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-6 rtl:space-x-reverse mt-10 mb-4">
               <div
                 onClick={resetImageSizes}
-                className="flex rtl:space-x-reverse space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-red-400 cursor-pointer border text-gray-700 text-center">
+                className="flex rtl:space-x-reverse space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-red-400 cursor-pointer border text-gray-700 text-center"
+              >
                 <RxReset className="text-gray-500 cursor-pointer" />
                 <a className="">{t("Reset")}</a>
               </div>
 
               <div
                 onClick={() => setContent()}
-                className="flex rtl:space-x-reverse space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-blue-400 cursor-pointer border text-gray-700 text-center">
+                className="flex rtl:space-x-reverse space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-blue-400 cursor-pointer border text-gray-700 text-center"
+              >
                 <RxUpdate className="text-gray-500 cursor-pointer" />
                 <a className="">{t("Update Pixels")}</a>
               </div>
 
               <div
                 onClick={() => CreateLogo()}
-                className="rtl:space-x-reverse hover:opacity-80 text-white flex bg-primary space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full duration-200 cursor-pointer border text-center">
+                className="rtl:space-x-reverse hover:opacity-80 text-white flex bg-primary space-x-2 flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full duration-200 cursor-pointer border text-center"
+              >
                 <FaRegSave className="text-white cursor-pointer" />
                 <a className="">{t("Save")}</a>
               </div>
@@ -227,11 +229,13 @@ function App() {
         open={open}
         autoHideDuration={5000}
         onClose={handleClose}
-        className="mt-4">
+        className="mt-4"
+      >
         <Alert
           onClose={handleClose}
           severity={!error ? "success" : "error"}
-          sx={{ width: "100%" }}>
+          sx={{ width: "100%" }}
+        >
           {message}
         </Alert>
       </Snackbar>

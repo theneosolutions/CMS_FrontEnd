@@ -1,16 +1,16 @@
 import { LuLayoutDashboard } from "react-icons/lu";
-import DashboardPageLayout from "../Pages/Dashboard/DashboardPageLayout";
-import Applications from "../Pages/Dashboard/Applications";
-import BrandingPageLayout from "dmsPages/Branding/BrandingPageLayout";
-import Logo from "dmsPages/Branding/Logo";
-import Color from "dmsPages/Branding/Color";
-import Splash from "dmsPages/Branding/Splash";
-import Fonts from "dmsPages/Branding/Fonts";
-import Slider from "dmsPages/Branding/Slider";
-import InternalApiTree from "dmsPages/dashboard/internalApiTree";
-import ExternalApiTree from "dmsPages/dashboard/externalApiTree";
-import Screens from "Pages/Dashboard/Screens";
-import Builder from "Pages/Dashboard/builder";
+import DashboardPageLayout from "pages/dashboard/DashboardPageLayout";
+import Applications from "pages/dashboard/Applications";
+import BrandingPageLayout from "pages/Branding/BrandingPageLayout";
+import Logo from "pages/Branding/Logo";
+import Color from "pages/Branding/Color";
+import Splash from "pages/Branding/Splash";
+import Fonts from "pages/Branding/Fonts";
+import Slider from "pages/Branding/Slider";
+import InternalApiTree from "pages/dashboard/internalApiTree";
+import ExternalApiTree from "pages/dashboard/externalApiTree";
+import Screens from "pages/dashboard/Screens";
+import Builder from "pages/dashboard/builder";
 
 const appRoutes = [
   {

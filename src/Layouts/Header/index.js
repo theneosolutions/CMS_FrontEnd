@@ -14,10 +14,10 @@ import { IoSearchOutline } from "react-icons/io5";
 function Header({ isOpen, toggleSidebar, className }) {
   const { t } = useTranslation();
   const brand = JSON.parse(localStorage.getItem("brand"));
-  console.log("brandbrand", brand?.branding?.brandName);
   return (
     <div
-      className={`px-3 md:px-10 py-4 flex flex-row justify-between  bg-secondry ${className}`}>
+      className={`px-3 md:px-10 py-4 flex flex-row justify-between  bg-secondry ${className}`}
+    >
       <div className="flex flex-row space-x-4 rtl:space-x-reverse items-center">
         {isOpen ? null : (
           <div className="h-6 w-6">
@@ -91,7 +91,8 @@ const Icons2 = ({ icon }) => {
     <div className={`relative inline-block text-left`} ref={dropDownRef}>
       <div
         onClick={toggleDropdown}
-        className="h-6 w-6 md:h-8 md:w-8 bg-white border-gray-300 border rounded-full items-center text-center justify-center flex">
+        className="h-6 w-6 md:h-8 md:w-8 bg-white border-gray-300 border rounded-full items-center text-center justify-center flex"
+      >
         <img src={icon} className="h-4 w-4 md:h-6 md:w-6" />
       </div>
       {isOpen && (
@@ -100,20 +101,23 @@ const Icons2 = ({ icon }) => {
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
-          tabIndex="-1">
+          tabIndex="-1"
+        >
           <div className="py-1" role="none">
             <a
               onClick={() => handleLanguageChange("en", "ltr")}
               className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
               role="menuitem"
-              tabIndex="-1">
+              tabIndex="-1"
+            >
               English
             </a>
             <a
               onClick={() => handleLanguageChange("ar", "rtl")}
               className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
               role="menuitem"
-              tabIndex="-1">
+              tabIndex="-1"
+            >
               Arabic
             </a>
           </div>
@@ -132,7 +136,6 @@ const Dropdown = () => {
     setIsOpen(!isOpen);
   };
   const SwicthBrand = () => {
-    console.log("switch ");
     localStorage.removeItem("brand");
     navigate("/brands");
   };
@@ -174,13 +177,15 @@ const Dropdown = () => {
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
-          tabIndex="-1">
+          tabIndex="-1"
+        >
           <div className="py-1" role="none">
             <a
               onClick={() => handleChangeMyAccount()}
               className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
               role="menuitem"
-              tabIndex="-1">
+              tabIndex="-1"
+            >
               My Account
             </a>
             <a
@@ -188,7 +193,8 @@ const Dropdown = () => {
               href="#"
               className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
               role="menuitem"
-              tabIndex="-1">
+              tabIndex="-1"
+            >
               Swicth Brand
             </a>
             <a
@@ -196,7 +202,8 @@ const Dropdown = () => {
               href="#"
               className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
               role="menuitem"
-              tabIndex="-1">
+              tabIndex="-1"
+            >
               Logout
             </a>
           </div>

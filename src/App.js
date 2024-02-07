@@ -23,13 +23,9 @@ function App() {
   LocalesConfig(lng);
 
   return (
-    //HTML5Backend For Drag and drop Component in Applications page
     <html dir={dir}>
       <Provider store={store}>
-        <DndProvider backend={HTML5Backend}>
-          {/* <PrivateRoutes /> */}
-          {<Routes />}
-        </DndProvider>
+        <DndProvider backend={HTML5Backend}>{<Routes />}</DndProvider>
       </Provider>
     </html>
   );

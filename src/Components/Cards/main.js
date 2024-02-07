@@ -18,7 +18,8 @@ function CardMain({
 }) {
   return (
     <div
-      className={`bg-white rounded-lg shadow-sm px-5 py-4 rtl:space-x-reverse  ${width}`}>
+      className={`bg-white rounded-lg shadow-sm px-5 py-4 rtl:space-x-reverse  ${width}`}
+    >
       <div className="flex flex-col md:flex-row  md:space-x-2 rtl:space-x-reverse justify-between">
         {!headerDisable && (
           <div className="flex flex-row space-x-2 rtl:space-x-reverse items-center pb-4">

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import Sidebar from "./sidebar";
 import { Button, Tooltip } from "Components";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Snackbar } from "@mui/material";
@@ -14,16 +13,11 @@ function TestPage() {
   const open = useSelector((state) => state.open);
   const error = useSelector((state) => state.error);
   const loading = useSelector((state) => state.Loading);
-  const [isSidebarOpen, setSidebarOpen] = React.useState(false);
   const [state, setState] = React.useState(true);
   const [activeSideScreen, setActiveSideScreen] = React.useState("");
 
-  const divRefs = useRef({});
-
   const [active, setActive] = useState();
-  const handleSidebarToggle = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
+
   useEffect(() => {
     getAppFlow();
   }, []);
@@ -38,23 +32,20 @@ function TestPage() {
 
   const handleInputChange = (value) => {
     setActiveSideScreen(value);
-    // }
   };
 
-  // const filter = getAppFlowData?.appFlow?.screenFlow.find(
-  //   (item) => item.name === activeSideScreen
-  // );
-  console.log("filter", activeSideScreen);
   return (
     <div
       style={{ height: "80vh" }}
-      className="flex bg-black md:flex-row flex-col md:space-y-0 space-y-3 mt-5 md:mt-0 w-full flex w-full ">
+      className="flex bg-black md:flex-row flex-col md:space-y-0 space-y-3 mt-5 md:mt-0 w-full flex w-full "
+    >
       <WaveAnimation show={loading} />
 
       <div
         className={`${
           state ? "w-full md:w-1/5" : "w-full md:w-min"
-        }		bg-gray-100  items-center rounded-lg h-max `}>
+        }		bg-gray-100  items-center rounded-lg h-max `}
+      >
         <LeftSideBar
           state={state}
           setState={(e) => setState(e)}
@@ -65,11 +56,13 @@ function TestPage() {
       <div
         className={`${
           state ? "w-full md:w-3/5	" : "w-full"
-        }	 flex   flex flex-row space-x-4 	 justify-center`}>
+        }	 flex   flex flex-row space-x-4 	 justify-center`}
+      >
         <div className="flex flex-wrap">
           <div className="w-full md:w-56 px-2 cursor-pointer">
             <div
-              className={`relative mt-4 w-full  bg-white border-4  rounded-3xl overflow-hidden`}>
+              className={`relative mt-4 w-full  bg-white border-4  rounded-3xl overflow-hidden`}
+            >
               <div className="w-full h-6 bg-gray-800 justify-center flex text-white text-xs items-center pb-1">
                 {activeSideScreen?.name}
               </div>
@@ -114,46 +107,17 @@ function TestPage() {
         </div>
       </div>
 
-      {/* <div>
-          <div
-            className={`w-72 flex flex-col fixed  h-full w-0 bg-white overflow-x-hidden transition-all duration-500 `}>
-            <div className="m-4">
-              <button className="top-4 right-4  text-gray-400   rounded w-max "></button>
-              <div className="w-full  ">
-                <a className="w-full text-center  justify-center flex text-gray-800 text-semibold text-primary underline text-xl">
-                  {active?.name}
-                </a>
-                <div className="flex flex-col space-y-2">
-                  {active?.button?.map((v, k) => {
-                    return (
-                      <InputField
-                        heading={v.name}
-                        onChange={(e) => console.log(e)}
-                      />
-                    );
-                  })}
-                </div>
-                <div className="flex flex-row justify-between">
-                  <div></div>
-                  <Button
-                    onButtonClick={() => console.log("helo")}
-                    buttonValue={"Create"}
-                    buttonStyle="px-20 py-2 w-full md:w-max mt-4"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
       <Snackbar
         open={open}
         autoHideDuration={5000}
         onClose={handleClose}
-        className="mt-4">
+        className="mt-4"
+      >
         <Alert
           onClose={handleClose}
           severity={!error ? "success" : "error"}
-          sx={{ width: "100%" }}>
+          sx={{ width: "100%" }}
+        >
           {message}
         </Alert>
       </Snackbar>
@@ -179,28 +143,6 @@ function InputField({ heading, value, onChange, type }) {
   );
 }
 
-function Select({ heading, value, onChange, type }) {
-  var options = [
-    { value: "option1", label: "Moderater" },
-    { value: "option1", label: "Admin" },
-    { value: "option2", label: "User" },
-  ];
-  return (
-    <div className="flex flex-col w-full">
-      <a className="text-sm text-gray-700">{heading}</a>{" "}
-      <select
-        onChange={(e) => onChange(e.target.value)}
-        value={value}
-        className="border-primary border rounded-md px-3 py-2 outline-none mt-2 w-full">
-        {options.map((option, index) => (
-          <option key={index} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}
 const data = [
   {
     name: "Splash1",

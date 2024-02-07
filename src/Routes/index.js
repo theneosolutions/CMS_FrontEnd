@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "../Layouts/MainLayout";
 import { routes } from "./routes";
-import TestPage from "Pages/TestPage";
-import TestPage2 from "Pages/TestPage/test2";
-import MyAccount from "Pages/MyAccount";
-import Login from "Pages/authentication/Login";
-import Otp from "Pages/authentication/otp";
-import CreateBrand from "dmsPages/Branding/createBrand";
-import SingleSlider from "dmsPages/singleSlider";
+import TestPage from "pages/TestPage";
+import TestPage2 from "pages/TestPage/test2";
+import MyAccount from "pages/MyAccount";
+import Login from "pages/authentication/Login";
+import Otp from "pages/authentication/otp";
+import CreateBrand from "pages/Branding/createBrand";
+import SingleSlider from "pages/singleSlider";
 
 function App() {
   return (

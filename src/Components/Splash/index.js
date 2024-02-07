@@ -61,7 +61,8 @@ function Splash({
           <div className="pt-1 pb-1">
             <div
               onClick={handleClick}
-              className="border  bg-secondry rounded-md border-dashed	 border-slate-200 items-center flex flex-col justify-center px-4 py-8">
+              className="border  bg-secondry rounded-md border-dashed	 border-slate-200 items-center flex flex-col justify-center px-4 py-8"
+            >
               <img src={UplaodIcon} className="w-14" />
               <a className="font-semibold mt-2 text-sm">
                 {t("Drag & drop files or")}{" "}
@@ -102,14 +103,16 @@ function Splash({
           <div className="flex md:flex-row flex-col space-y-4 md:space-y-0 md:space-x-6 mt-10 mb-4 rtl:space-x-reverse">
             <div
               onClick={resetImageSizes}
-              className="flex space-x-2 rtl:space-x-reverse flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-red-400 cursor-pointer border text-gray-700 text-center">
+              className="flex space-x-2 rtl:space-x-reverse flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full border-red-400 cursor-pointer border text-gray-700 text-center"
+            >
               <RxReset className="text-gray-500 cursor-pointer" />
               <a className="">{t("Reset")}</a>
             </div>
 
             <div
               onClick={CreateSplash}
-              className="text-white flex bg-primary space-x-2 rtl:space-x-reverse flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full hover:opacity-90 duration-200 cursor-pointer border text-center">
+              className="text-white flex bg-primary space-x-2 rtl:space-x-reverse flex-row rounded-lg text-xs justify-center items-center h-8 md:w-36 w-full hover:opacity-90 duration-200 cursor-pointer border text-center"
+            >
               <FaRegSave className="text-white cursor-pointer" />
               <a className="">{t("Save")}</a>
             </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import ModeButton from "../../Components/Buttons/ModeButton";
 import DragDrop from "../../Layouts/DrapDrop";
 import { useTranslation } from "react-i18next";
 function Applications() {

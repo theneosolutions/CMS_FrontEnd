@@ -19,7 +19,6 @@ const Fonts = () => {
   const [selecteFonts, setSelectedFonts] = useState([]); // State to hold selected checkbox IDs
   const getfonts = useSelector((state) => state.getfonts);
 
-  console.log("getfonts", getfonts?.data?.response);
   const handleClose = () => {
     dispatch(action.Message({ open: false })); // Closing the message
   };
@@ -30,25 +29,11 @@ const Fonts = () => {
     getFontsAdmin();
   }, []);
 
-  const handleCheckboxChange = (font) => {
-    if (!isSelected(font)) {
-      setSelectedFonts([...selecteFonts, font]);
-    }
-  };
-
-  const isSelected = (font) => {
-    return selecteFonts.some(
-      (selectedFont) => selectedFont.family === font.family
-    );
-  };
-
   function handleAddFonts(v) {
-    console.log("fonts", v);
     dispatch({
       type: "SET_FONTS",
       payload: v,
     });
-    // handleCheckboxChange(v);
     getFontsAdmin();
   }
   function getFontsAdmin() {
@@ -63,7 +48,8 @@ const Fonts = () => {
       <CardMain
         width="lg:w-1/2 w-full mt-4 lg:mt-0"
         heading={t("Set Fonts File")}
-        Component={<Search setSearchInput={setSearchInput} />}>
+        Component={<Search setSearchInput={setSearchInput} />}
+      >
         <div className="flex flex-row flex-wrap ">
           <div className="overflow-x-auto w-full">
             <table className="mt-4 w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -87,13 +73,15 @@ const Fonts = () => {
                   .map((v, k) => (
                     <tr
                       key={k}
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                    >
                       <td className="px-3 py-4">{v.family}</td>
                       <td className="px-3 py-4">
                         <div className="flex flex-row space-x-4 rtl:space-x-reverse ">
                           <a
                             onClick={() => handleAddFonts(v)}
-                            className="bg-primary rounded-md px-5 py-1 text-white hover:opacity-80 cursor-pointer">
+                            className="bg-primary rounded-md px-5 py-1 text-white hover:opacity-80 cursor-pointer"
+                          >
                             {t("Save")}
                           </a>
                         </div>
@@ -126,7 +114,8 @@ const Fonts = () => {
                 {getfonts?.data?.response?.map((v, k) => (
                   <tr
                     key={k}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  >
                     <td className="px-3 py-4">{v.family}</td>
                     <td className="px-3 py-4">
                       <div className="flex flex-row space-x-4 rtl:space-x-reverse">
@@ -153,7 +142,8 @@ const Fonts = () => {
         <Alert
           onClose={handleClose}
           severity={!error ? "success" : "error"}
-          sx={{ width: "100%" }}>
+          sx={{ width: "100%" }}
+        >
           {message}
         </Alert>
       </Snackbar>

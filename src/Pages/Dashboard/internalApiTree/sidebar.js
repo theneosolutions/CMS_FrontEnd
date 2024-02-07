@@ -11,10 +11,7 @@ export default function Sidebar({ setName, name }) {
   };
   const dispatch = useDispatch();
   const endpoints = useSelector((state) => state.endpoints);
-  console.log(
-    "apisssssssssssssapisssssssssssssapisssssssssssss",
-    endpoints[0]?.apiFlow
-  );
+
   useEffect(() => {
     dispatch({
       type: "GET_ENDPOINTS",
@@ -23,16 +20,10 @@ export default function Sidebar({ setName, name }) {
 
   const nodes2 =
     endpoints[0]?.apiFlow?.map((endpoint) => {
-      // Split the endpoint by slashes
       const parts = endpoint.split("/");
-      console.log("parts", parts);
-      // Extract the last two parts as label
       const label = `/${parts[parts.length - 2]}/${parts[parts.length - 1]}`;
-
-      // Create the object with type and label
       return { type: endpoint, label: label };
     }) || [];
-  console.log("helo from endpoints", nodes2);
 
   const nodes = [
     { type: "/decisions", label: "/decisions" },
@@ -69,7 +60,8 @@ export default function Sidebar({ setName, name }) {
           key={node.type}
           className={`mt-4 dndnode ${node.type === "Sidebar" ? "input" : ""}`}
           onDragStart={(event) => onDragStart(event, node)}
-          draggable>
+          draggable
+        >
           {node.label}
         </div>
       ))}

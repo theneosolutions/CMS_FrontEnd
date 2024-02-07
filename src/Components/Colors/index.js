@@ -37,7 +37,7 @@ const Color = ({ name, color, published, onClick }) => {
               height={200}
               color={selectedColor}
               onChange={handleColorChange}
-              onChangeComplete={(color, event) => console.log(color)}
+              // onChangeComplete={(color, event) => console.log("asdasd", color)}
             />
           </div>
           <Button

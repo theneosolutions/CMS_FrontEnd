@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import WaveAnimation from "Components/Loading";
 import { Alert, Snackbar } from "@mui/material";
 import * as action from "Services/redux/reducer";
-import Test from "Components/test";
 import { BrandId } from "funtions/BrandId";
 
 const Colors = () => {
@@ -16,7 +15,6 @@ const Colors = () => {
   const getBrand = useSelector((state) => state.getSingleBrand);
   const loading = useSelector((state) => state.Loading);
 
-  console.log("colors colors", getBrand);
   function handleColor(color, name) {
     dispatch({
       type: "SET_COLOR",
@@ -24,11 +22,9 @@ const Colors = () => {
     });
 
     setTimeout(() => handleBrand(), 500);
-    // handleBrand();
   }
 
   function handleBrand() {
-    // console.log("getBrand", getBrand.brandId);
     dispatch({
       type: "GET_SINGLE_BRAND",
       payload: BrandId(),
@@ -58,7 +54,6 @@ const Colors = () => {
   return (
     <>
       <WaveAnimation show={loading} />
-      <Test />
       <div className="flex flex-wrap">
         {predefinedColors.map((colorData) => (
           <Color
@@ -77,7 +72,8 @@ const Colors = () => {
         <Alert
           onClose={handleClose}
           severity={!error ? "success" : "error"}
-          sx={{ width: "100%" }}>
+          sx={{ width: "100%" }}
+        >
           {message}
         </Alert>
       </Snackbar>
