@@ -4,7 +4,9 @@ import { routes } from "./routes";
 import Profile from "Pages/Profile";
 import TestPage from "Pages/TestPage";
 import TestPage2 from "Pages/TestPage/test2";
-import TestPage3 from "Pages/TestPage/test3";
+import TestPage3 from "Pages/TestPage/testpage3";
+
+// import TestPage3 from "Pages/TestPage/test3";
 
 import Applications from "Pages/Applications";
 import UserDetail from "Pages/UserDetail";
@@ -39,6 +41,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/apitree" element={<ReactFlow />} />
+        <Route path="/test3" element={<TestPage3 />} />
       </Routes>
     </BrowserRouter>
   );

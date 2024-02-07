@@ -13,7 +13,7 @@ import SliderJson from "./splash2.json";
 import Lottie from "lottie-react";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
+import axios from "axios";
 function App() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -72,6 +72,10 @@ function App() {
     console.log("data[0]", data[0]?.brandSliderScreenList[0]);
     setActive(data[0]?.brandSliderScreenList[0]);
   }, []);
+  // console.log(
+  //   getLottieFile("https://seulahbucket.s3.amazonaws.com/Loan_Operation.json")
+  // );
+
   return (
     <div className="flex flex-col mx-auto mt-5 ">
       <WaveAnimation show={loading} />
@@ -102,7 +106,8 @@ function App() {
                   active.title === v.title
                     ? "border-b-2 border-blue-400 text-blue-400"
                     : null
-                }  px-3 py-1`}>
+                }  px-3 py-1`}
+              >
                 <a>{v.title}</a>
               </div>
             );
@@ -119,11 +124,13 @@ function App() {
         open={open}
         autoHideDuration={5000}
         onClose={handleClose}
-        className="mt-4">
+        className="mt-4"
+      >
         <Alert
           onClose={handleClose}
           severity={!error ? "success" : "error"}
-          sx={{ width: "100%" }}>
+          sx={{ width: "100%" }}
+        >
           {message}
         </Alert>
       </Snackbar>
@@ -132,21 +139,35 @@ function App() {
 }
 
 export default App;
-
-function ShowData({ data }) {
-  const { t } = useTranslation();
-  let animationData = null;
+async function getLottieFile(item) {
   try {
-    animationData = data?.file ? JSON.parse(data?.file) : null;
+    const response = await axios.get(item);
+    console.log("json", response.data);
+    return response.data;
   } catch (error) {
-    console.error("Error parsing JSON:", error);
+    console.error("Error fetching Lottie file:", error);
+    throw error; // Rethrow the error to handle it at a higher level if needed
   }
+}
+function ShowData({ data }) {
+  const [animationData, setAnimationData] = useState(null);
+  console.log("data?.file", data?.file);
+  useEffect(() => {
+    getLottieFile(data?.file)
+      .then((result) => {
+        setAnimationData(result);
+      })
+      .catch((error) => {
+        console.error("Error fetching animation data:", error);
+      });
+  }, [data?.file]); // Empty dependency array ensures this effect runs only once after initial render
+
   return (
     <div className="bg-white px-5 w-full py-6">
-      <div className="bg-white border  bg-secondry border-dashed	 border-slate-200 flex flex-col px-4 py-4">
-        <div className="flex flex-row  justify-between space-x-2 flex flex-end rtl:space-x-reverse">
+      <div className=" border  bg-secondry border-dashed  border-slate-200 flex flex-col px-4 py-4">
+        <div className=" flex-row  justify-between space-x-2 flex flex-end rtl:space-x-reverse">
           <div></div>
-          <div className="flex flex-row  space-x-2 flex flex-end pb-4 rtl:space-x-reverse">
+          <div className=" flex-row  space-x-2 flex flex-end pb-4 rtl:space-x-reverse">
             <FaRegEdit className="text-blue-500 cursor-pointer" />
             <RiDeleteBin6Line className="text-red-400 cursor-pointer" />
           </div>
@@ -170,7 +191,7 @@ function ShowData({ data }) {
             {animationData ? (
               <Lottie animationData={animationData} loop={true} />
             ) : (
-              <div>Error loading animation</div>
+              <div>Loading animation...</div>
             )}
           </div>
         </div>
